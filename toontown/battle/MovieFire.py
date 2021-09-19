@@ -340,3 +340,37 @@ ActorInterval(kapow, 'kapow'), Func(kapow.hide)), LerpPosInterval(suit, 3.0, Poi
      soundTrack,
      buttonTrack,
      suitResponseTrack]
+
+def doGradualDamages(battle, damages):
+    if not damages:
+        return (None, None)
+
+    mTrack = Parallel()
+
+    for damage in damages:
+        suitId, hp, died, revived = damage
+        suit = battle.findSuit(suitId)
+
+        if not suit:
+            continue
+
+        suitTrack = Sequence(
+            Func(suit.showHpText, -hp, attackTrack=SQUIRT_TRACK),
+            Func(suit.updateHealthBar, hp),
+            Parallel(
+                getSplicedLerpAnimsTrack(suit, 'squirt-small-react', 0.5, 0.25),
+                ActorInterval(suit, 'squirt-small-react'),
+                MovieUtil.createSuitStunInterval(suit, 0.5, 1.8)
+            )
+        )
+
+        if revived:
+            suitTrack.append(MovieUtil.createSuitReviveTrack(suit, battle))
+        elif died:
+            suitTrack.append(MovieUtil.createSuitDeathTrack(suit, battle))
+
+        mTrack.append(suitTrack)
+
+    duration = mTrack.getDuration()
+    camTrack = MovieCamera.allGroupLowShot(None, duration)
+    return (mTrack, camTrack)

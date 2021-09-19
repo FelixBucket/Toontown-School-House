@@ -16,7 +16,7 @@ from otp.otpbase import PythonUtil
 class DistributedBattleBldgAI(DistributedBattleBaseAI.DistributedBattleBaseAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBattleBldgAI')
 
-    def __init__(self, air, zoneId, roundCallback = None, finishCallback = None, maxSuits = 4, bossBattle = 0):
+    def __init__(self, air, zoneId, roundCallback = None, finishCallback = None, maxSuits = 8, bossBattle = 0):
         DistributedBattleBaseAI.DistributedBattleBaseAI.__init__(self, air, zoneId, finishCallback, maxSuits, bossBattle)
         self.streetBattle = 0
         self.roundCallback = roundCallback

@@ -124,6 +124,10 @@ class TownBattle(StateData.StateData):
         self.cogFireCosts = [None,
          None,
          None,
+         None,
+         None,
+         None,
+         None,
          None]
         self.toonPanels = (TownBattleToonPanel.TownBattleToonPanel(0),
          TownBattleToonPanel.TownBattleToonPanel(1),

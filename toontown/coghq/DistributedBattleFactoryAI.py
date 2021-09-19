@@ -9,7 +9,7 @@ from direct.showbase.PythonUtil import addListsByValue
 class DistributedBattleFactoryAI(DistributedLevelBattleAI.DistributedLevelBattleAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBattleFactoryAI')
 
-    def __init__(self, air, battleMgr, pos, suit, toonId, zoneId, level, battleCellId, roundCallback = None, finishCallback = None, maxSuits = 4):
+    def __init__(self, air, battleMgr, pos, suit, toonId, zoneId, level, battleCellId, roundCallback = None, finishCallback = None, maxSuits = 8):
         DistributedLevelBattleAI.DistributedLevelBattleAI.__init__(self, air, battleMgr, pos, suit, toonId, zoneId, level, battleCellId, 'FactoryReward', roundCallback, finishCallback, maxSuits)
         self.battleCalc.setSkillCreditMultiplier(1)
         if self.bossBattle:

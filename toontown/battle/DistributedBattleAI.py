@@ -11,7 +11,7 @@ import random
 class DistributedBattleAI(DistributedBattleBaseAI.DistributedBattleBaseAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBattleAI')
 
-    def __init__(self, air, battleMgr, pos, suit, toonId, zoneId, finishCallback = None, maxSuits = 4, tutorialFlag = 0, levelFlag = 0, interactivePropTrackBonus = -1):
+    def __init__(self, air, battleMgr, pos, suit, toonId, zoneId, finishCallback = None, maxSuits = 8, tutorialFlag = 0, levelFlag = 0, interactivePropTrackBonus = -1):
         DistributedBattleBaseAI.DistributedBattleBaseAI.__init__(self, air, zoneId, finishCallback, maxSuits=maxSuits, tutorialFlag=tutorialFlag, interactivePropTrackBonus=interactivePropTrackBonus)
         self.battleMgr = battleMgr
         self.pos = pos

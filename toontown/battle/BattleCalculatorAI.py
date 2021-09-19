@@ -782,9 +782,9 @@ class BattleCalculatorAI:
 
     def __clearBonuses(self, hp=1):
         if hp:
-            self.hpBonuses = [{}, {}, {}, {}]
+            self.hpBonuses = [{}, {}, {}, {}, {}, {}, {}, {}]
         else:
-            self.kbBonuses = [{}, {}, {}, {}]
+            self.kbBonuses = [{}, {}, {}, {}, {}, {}, {}, {}]
 
     def __bonusExists(self, tgtSuit, hp=1):
         tgtPos = self.activeSuits.index(tgtSuit)
@@ -1369,7 +1369,7 @@ class BattleCalculatorAI:
                 self.battle.toonAttacks[t][TOON_HP_COL].append(-1)
                 self.battle.toonAttacks[t][TOON_KBBONUS_COL].append(-1)
 
-        for i in xrange(4):
+        for i in xrange(8):
             for j in xrange(len(self.battle.activeToons)):
                 self.battle.suitAttacks[i][SUIT_HP_COL].append(-1)
 

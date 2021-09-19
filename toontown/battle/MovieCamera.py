@@ -174,7 +174,7 @@ def chooseSoundCloseShot(sounds, targets, openDuration, openName, attackDuration
          avatarCloseUpThreeQuarterLeftShot,
          allGroupLowShot,
          suitGroupThreeQuarterLeftBehindShot]
-    elif numSuits >= 2 and numSuits <= 4:
+    elif numSuits >= 2 and numSuits <= 8:
         shotChoices = [allGroupLowShot, suitGroupThreeQuarterLeftBehindShot]
     else:
         notify.error('Bad number of suits: %s' % numSuits)

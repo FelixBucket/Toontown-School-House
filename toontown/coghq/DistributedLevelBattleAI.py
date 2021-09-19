@@ -10,7 +10,7 @@ from direct.showbase.PythonUtil import addListsByValue
 class DistributedLevelBattleAI(DistributedBattleAI.DistributedBattleAI):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedLevelBattleAI')
 
-    def __init__(self, air, battleMgr, pos, suit, toonId, zoneId, level, battleCellId, winState, roundCallback = None, finishCallback = None, maxSuits = 4):
+    def __init__(self, air, battleMgr, pos, suit, toonId, zoneId, level, battleCellId, winState, roundCallback = None, finishCallback = None, maxSuits = 8):
         self.blocker = None
         self.level = level
         self.battleCellId = battleCellId

@@ -28,13 +28,17 @@ class TownBattleChooseAvatarPanel(StateData.StateData):
         else:
             self.textFrame['text'] = TTLocalizer.TownBattleChooseAvatarCogTitle
         self.avatarButtons = []
-        for i in xrange(4):
-            button = DirectButton(parent=self.frame, relief=None, image=(gui.find('**/PckMn_Arrow_Up'), gui.find('**/PckMn_Arrow_Dn'), gui.find('**/PckMn_Arrow_Rlvr')), command=self.__handleAvatar, extraArgs=[i])
+        for i in range(8):
+            button=DirectButton(parent=self.frame, relief=None, image=(
+            gui.find('**/PckMn_Arrow_Up'), gui.find('**/PckMn_Arrow_Dn'), gui.find('**/PckMn_Arrow_Rlvr')),
+                                command=self.__handleAvatar, extraArgs=[i])
             if self.toon:
                 button.setScale(1, 1, -1)
+                self.origScale=(1, 1, -1)
                 button.setPos(0, 0, -0.2)
             else:
                 button.setScale(1, 1, 1)
+                self.origScale=(1, 1, 1)
                 button.setPos(0, 0, 0.2)
             self.avatarButtons.append(button)
 
@@ -89,26 +93,72 @@ class TownBattleChooseAvatarPanel(StateData.StateData):
         self.__placeButtons(numToons, [], localNum)
 
     def __placeButtons(self, numAvatars, invalidTargets, localNum):
-        for i in xrange(4):
+        for i in range(8):
             if numAvatars > i and i not in invalidTargets and i != localNum:
                 self.avatarButtons[i].show()
             else:
                 self.avatarButtons[i].hide()
 
+        for button in self.avatarButtons:
+            button.setScale(self.origScale)
+
         if numAvatars == 1:
             self.avatarButtons[0].setX(0)
-        elif numAvatars == 2:
-            self.avatarButtons[0].setX(0.2)
-            self.avatarButtons[1].setX(-0.2)
-        elif numAvatars == 3:
-            self.avatarButtons[0].setX(0.4)
-            self.avatarButtons[1].setX(0.0)
-            self.avatarButtons[2].setX(-0.4)
-        elif numAvatars == 4:
-            self.avatarButtons[0].setX(0.6)
-            self.avatarButtons[1].setX(0.2)
-            self.avatarButtons[2].setX(-0.2)
-            self.avatarButtons[3].setX(-0.6)
         else:
-            self.notify.error('Invalid number of avatars: %s' % numAvatars)
-        return None
+            if numAvatars == 2:
+                self.avatarButtons[0].setX(0.2)
+                self.avatarButtons[1].setX(-0.2)
+            else:
+                if numAvatars == 3:
+                    self.avatarButtons[0].setX(0.4)
+                    self.avatarButtons[1].setX(0.0)
+                    self.avatarButtons[2].setX(-0.4)
+                else:
+                    if numAvatars == 4:
+                        self.avatarButtons[0].setX(0.6)
+                        self.avatarButtons[1].setX(0.2)
+                        self.avatarButtons[2].setX(-0.2)
+                        self.avatarButtons[3].setX(-0.6)
+                    else:
+                        if numAvatars == 5:
+                            self.avatarButtons[0].setX(0.6)
+                            self.avatarButtons[1].setX(0.3)
+                            self.avatarButtons[2].setX(0.0)
+                            self.avatarButtons[3].setX(-0.3)
+                            self.avatarButtons[4].setX(-0.6)
+                        else:
+                            if numAvatars == 6:
+                                self.avatarButtons[0].setX(0.6)
+                                self.avatarButtons[1].setX(0.35)
+                                self.avatarButtons[2].setX(0.12)
+                                self.avatarButtons[3].setX(-0.12)
+                                self.avatarButtons[4].setX(-0.35)
+                                self.avatarButtons[5].setX(-0.6)
+                            else:
+                                if numAvatars == 7:
+                                    self.avatarButtons[0].setX(0.6)
+                                    self.avatarButtons[1].setX(0.4)
+                                    self.avatarButtons[2].setX(0.2)
+                                    self.avatarButtons[3].setX(0.0)
+                                    self.avatarButtons[4].setX(-0.2)
+                                    self.avatarButtons[5].setX(-0.4)
+                                    self.avatarButtons[6].setX(-0.6)
+                                    for button in self.avatarButtons:
+                                        button.setScale(0.85, self.origScale[1], self.origScale[2])
+
+                                else:
+                                    if numAvatars == 8:
+                                        self.avatarButtons[0].setX(0.6)
+                                        self.avatarButtons[1].setX(0.4286)
+                                        self.avatarButtons[2].setX(0.2571)
+                                        self.avatarButtons[3].setX(0.0857)
+                                        self.avatarButtons[4].setX(-0.0857)
+                                        self.avatarButtons[5].setX(-0.2571)
+                                        self.avatarButtons[6].setX(-0.4286)
+                                        self.avatarButtons[7].setX(-0.6)
+                                        for button in self.avatarButtons:
+                                            button.setScale(0.6, self.origScale[1], self.origScale[2])
+
+                                    else:
+                                        self.notify.error('Invalid number of avatars: %s' % numAvatars)
+        return

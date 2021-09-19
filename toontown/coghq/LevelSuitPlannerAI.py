@@ -115,7 +115,7 @@ class LevelSuitPlannerAI(DirectObject.DirectObject):
         cellSpec = self.battleCellSpecs[cellIndex]
         pos = cellSpec['pos']
         zone = self.level.getZoneId(self.level.getEntityZoneEntId(cellSpec['parentEntId']))
-        maxSuits = 4
+        maxSuits = 8
         self.battleMgr.newBattle(cellIndex, zone, pos, suit, toonId, self.__handleRoundFinished, self.__handleBattleFinished, maxSuits)
         for otherSuit in self.battleCellId2suits[cellIndex]:
             if otherSuit is not suit:
