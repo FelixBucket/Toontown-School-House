@@ -5,10 +5,17 @@ from direct.task.Task import Task
 from direct.interval.IntervalGlobal import *
 
 class BossHealthBar:
+    bossBarColors = (Vec4(0, 1, 0, 0.8),
+                          Vec4(1, 1, 0, 0.8),
+                          Vec4(1, 0.5, 0, 0.8),
+                          Vec4(1, 0, 0, 0.8),
+                          Vec4(0.3, 0.3, 0.3, 0.8))
+    colorThresholds = (0.65, 0.4, 0.2, 0.1, 0.05)
+    bossBarStartPosZ = 1.5
+    bossBarEndPosZ = 0.88
+    bossBarIncrementAmt = 2
 
     def __init__(self):
-        self.bossBarStartPosZ = 1.5
-        self.bossBarEndPosZ = 0.88
         self.bossBarFrameBg = loader.loadTexture('phase_9/maps/HealthBarBosses.png')
         self.bossBarFrame = DirectFrame(pos=(0, 0, self.bossBarStartPosZ), scale=1.8, sortOrder=20)
         self.gui = loader.loadModel('phase_9/models/gui/HealthBarBosses')
@@ -19,6 +26,7 @@ class BossHealthBar:
         self.bossBar.hide()
         self.gui.reparentTo(self.bossBarFrame)
         self.bossBar.reparentTo(self.bossBarFrame)
+
         self.healthCondition = 0
         self.currHp = 0
         self.newHp = 0
@@ -26,12 +34,6 @@ class BossHealthBar:
         self.healthRatio = 0
         self.isUpdating = False
         self.isBlinking = False
-        self.bossBarColors = (Vec4(0, 1, 0, 0.8),
-                              Vec4(1, 1, 0, 0.8),
-                              Vec4(1, 0.5, 0, 0.8),
-                              Vec4(1, 0, 0, 0.8),
-                              Vec4(0.3, 0.3, 0.3, 0.8))
-        self.colorThresholds = (0.95, 0.7, 0.3, 0.05, 0.0)
 
     def initialize(self, hp, maxhp):
         self.maxHp = maxhp
@@ -40,11 +42,10 @@ class BossHealthBar:
         self.bossBar['text'] = ('%s / %s' % (str(hp), str(maxhp)))
         self.bossBar['range'] = maxhp
         self.bossBar['value'] = hp
-        self.bossBar['barColor'] = self.bossBarColors[self.healthCondition]
+        self.__checkUpdateColor(hp, maxhp)
         self.bossBar.show()
         self.gui.show()
-        seq = Sequence(self.bossBarFrame.posInterval(1.0, Point3(0, 0, self.bossBarEndPosZ), blendType='easeOut'))
-        seq.start()
+        Sequence(self.bossBarFrame.posInterval(1.0, Point3(0, 0, self.bossBarEndPosZ), blendType='easeOut')).start()
 
     def update(self, hp, maxHp):
         if self.isUpdating:
@@ -77,6 +78,9 @@ class BossHealthBar:
             self.__applyNewColor(condition)
             if self.healthCondition != condition:
                 if condition == 4:
+                    if self.healthCondition == 5:
+                        taskMgr.remove('bar-blink-task')
+                        self.isBlinking = False
                     blinkTask = Task.loop(Task(self.__blinkRed), Task.pause(0.75), Task(self.__blinkGray), Task.pause(0.1))
                     taskMgr.add(blinkTask, 'bar-blink-task')
                     self.isBlinking = True
@@ -136,9 +140,15 @@ class BossHealthBar:
             if self.currHp != self.newHp:
                 posOrNeg = self.currHp - self.newHp
                 if posOrNeg > 0:
-                    self.currHp -= 1
+                    if posOrNeg < self.bossBarIncrementAmt:
+                        self.currHp -= posOrNeg
+                    else:
+                        self.currHp -= self.bossBarIncrementAmt
                 elif posOrNeg < 0:
-                    self.currHp += 1
+                    if posOrNeg > self.bossBarIncrementAmt*-1:
+                        self.currHp += posOrNeg
+                    else:
+                        self.currHp += self.bossBarIncrementAmt
                 self.bossBar['text'] = ('%s / %s' % (str(self.currHp), str(self.maxHp)))
                 self.bossBar['value'] = self.currHp
                 self.__checkUpdateColor(self.currHp, self.maxHp)
@@ -148,18 +158,17 @@ class BossHealthBar:
             return Task.done
 
     def deinitialize(self):
-        seq = Sequence(self.bossBarFrame.posInterval(1.0, Point3(0, 0, self.bossBarStartPosZ), blendType='easeIn'))
-        seq.start()
+        Sequence(self.bossBarFrame.posInterval(1.0, Point3(0, 0, self.bossBarStartPosZ), blendType='easeIn')).start()
 
-    def cleanUp(self):
+    def cleanup(self):
         if self.bossBarFrame:
             self.bossBarFrame.destroy()
-            self.bossBarFrame = None
+            del self.bossBarFrame
             if self.bossBar:
                 if self.isUpdating:
                     taskMgr.remove('bar-smooth-update-task')
                 self.bossBar.destroy()
-                self.bossBar = None
+                del self.bossBar
                 if self.isBlinking:
                     taskMgr.remove('bar-blink-task')
-                self.healthCondition = 0
+                self.healthCondition = None
