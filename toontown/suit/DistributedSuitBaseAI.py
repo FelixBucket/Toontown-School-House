@@ -18,6 +18,7 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         self.virtual = 0
         self.skeleRevives = 0
         self.maxSkeleRevives = 0
+        self.executive = 0
         self.reviveFlag = 0
         self.buildingHeight = None
         return
@@ -85,6 +86,26 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
 
     def d_denyBattle(self, toonId):
         self.sendUpdateToAvatarId(toonId, 'denyBattle', [])
+
+    def b_setExecutive(self, executive):
+        if executive == None:
+            executive = 0
+        self.setExecutive(executive)
+        self.d_setExecutive(self.getExecutive())
+
+    def d_setExecutive(self, executive):
+        self.sendUpdate('setExecutive', [executive])
+
+    def getExecutive(self):
+        return self.executive
+
+    def setExecutive(self, executive):
+        if executive == None:
+            executive = 0
+        self.executive = executive
+        if self.executive:
+            self.maxHP = int(self.maxHP*1.5)
+            self.currHP = self.maxHP
 
     def b_setSkeleRevives(self, num):
         if num == None:
@@ -170,16 +191,6 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
 
     def isSupervisor(self):
         return 0
-
-    def b_setExecutive(self, flag):
-        self.setExecutive(flag)
-        self.d_setExecutive(flag)
-
-    def setExecutive(self, flag):
-        SuitBase.SuitBase.setExecutive(self, flag)
-
-    def d_setExecutive(self, flag):
-        self.sendUpdate('setExecutive', [flag])
 
     def setVirtual(self, virtual):
         pass

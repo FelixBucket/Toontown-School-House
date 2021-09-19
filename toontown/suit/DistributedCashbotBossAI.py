@@ -75,6 +75,28 @@ class DistributedCashbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         return {'activeSuits': activeSuits,
          'reserveSuits': reserveSuits}
 
+    def handleRoundDone(self, battle, suits, activeSuits, toonIds, totalHp, deadSuits):
+        totalMaxHp = 0
+        for suit in suits:
+            totalMaxHp += suit.maxHP
+
+        for suit in deadSuits:
+            activeSuits.remove(suit)
+
+        joinedReserves = []
+        if len(self.reserveSuits) > 0 and len(activeSuits) < 6:
+            hpPercent = 100 - totalHp / totalMaxHp * 100.0
+            for info in self.reserveSuits:
+                if info[1] <= hpPercent and len(activeSuits) < 6:
+                    suits.append(info[0])
+                    activeSuits.append(info[0])
+                    joinedReserves.append(info)
+
+            for info in joinedReserves:
+                self.reserveSuits.remove(info)
+
+        battle.resume(joinedReserves)
+
     def removeToon(self, avId):
         if self.cranes != None:
             for crane in self.cranes:

@@ -55,6 +55,7 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
         self.loop('neutral')
         self.skeleRevives = 0
         self.maxSkeleRevives = 0
+        self.executive = 0
         self.sillySurgeText = False
         self.interactivePropTrackBonus = -1
         return
@@ -64,6 +65,33 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
 
     def getVirtual(self):
         return 0
+
+    def setExecutive(self, executive):
+        self.executive = executive
+        if self.executive:
+            self.makeExecutive()
+
+    def getExecutive(self):
+        return self.executive
+
+    def makeExecutive(self):
+        self.maxHP = int(self.maxHP * 1.5)
+        self.currHP = self.maxHP
+        nameInfo = self.createNameInfo()
+        self.setDisplayName(nameInfo)
+
+    def createNameInfo(self):
+        nameName = self._name
+        nameDept = self.getStyleDept()
+        nameLevel = str(self.getActualLevel())
+        if self.getSkeleRevives() > 0:
+            nameLevel += TTLocalizer.SkeleRevivePostFix
+        if self.getExecutive():
+            nameLevel += TTLocalizer.ExecutiveCog
+        nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': nameName,
+            'dept': nameDept,
+            'level': nameLevel}
+        return nameInfo
 
     def setSkeleRevives(self, num):
         if num == None:
