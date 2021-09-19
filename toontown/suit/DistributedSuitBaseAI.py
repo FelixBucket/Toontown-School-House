@@ -171,6 +171,16 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
     def isSupervisor(self):
         return 0
 
+    def b_setExecutive(self, flag):
+        self.setExecutive(flag)
+        self.d_setExecutive(flag)
+
+    def setExecutive(self, flag):
+        SuitBase.SuitBase.setExecutive(self, flag)
+
+    def d_setExecutive(self, flag):
+        self.sendUpdate('setExecutive', [flag])
+
     def setVirtual(self, virtual):
         pass
 

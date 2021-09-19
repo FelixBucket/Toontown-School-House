@@ -59,6 +59,12 @@ class SuitBase:
     def setSkelecog(self, flag):
         self.isSkelecog = flag
 
+    def getExecutive(self):
+        return self.isExecutive
+
+    def setExecutive(self, flag):
+        self.isExecutive = flag
+
     def getActualLevel(self):
         if hasattr(self, 'dna'):
             return SuitBattleGlobals.getActualFromRelativeLevel(self.getStyleName(), self.level) + 1

@@ -20,3 +20,4 @@ errorCode
 .idea
 venv
 *.pyc
+*.pyc
