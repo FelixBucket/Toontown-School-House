@@ -1,11 +1,13 @@
 from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from toontown.suit import DistributedCashbotBoss
+from toontown.suit import DistributedAdvancedCashbotBoss
 from direct.directnotify import DirectNotifyGlobal
 from toontown.coghq import CogHQBossBattle
 
 class CashbotHQBossBattle(CogHQBossBattle.CogHQBossBattle):
-    notify = DirectNotifyGlobal.directNotify.newCategory('CashbotHQBossBattle')
+    #notify = DirectNotifyGlobal.directNotify.newCategory('CashbotHQBossBattle')
+    notify = DirectNotifyGlobal.directNotify.newCategory('AdvancedCashbotHQBossBattle')
 
     def __init__(self, loader, parentFSM, doneEvent):
         CogHQBossBattle.CogHQBossBattle.__init__(self, loader, parentFSM, doneEvent)
@@ -18,7 +20,8 @@ class CashbotHQBossBattle(CogHQBossBattle.CogHQBossBattle):
         CogHQBossBattle.CogHQBossBattle.unload(self)
 
     def enter(self, requestStatus):
-        CogHQBossBattle.CogHQBossBattle.enter(self, requestStatus, DistributedCashbotBoss.OneBossCog)
+        #CogHQBossBattle.CogHQBossBattle.enter(self, requestStatus, DistributedCashbotBoss.OneBossCog)
+        CogHQBossBattle.CogHQBossBattle.enter(self, requestStatus, DistributedAdvancedCashbotBoss.OneBossCog)
 
     def exit(self):
         CogHQBossBattle.CogHQBossBattle.exit(self)

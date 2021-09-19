@@ -412,7 +412,7 @@ class DistributedFactorySuit(DistributedSuitBase.DistributedSuitBase, DelayDelet
                     thing.setDepthWrite(False)
                     thing.setBin('fixed', 1)
 
-    def updateHealthBar(self, hp, forceUpdate= 0):
+    def updateHealthBar(self, hp, forceUpdate = 0):
         if hp > self.currHP:
             hp = self.currHP
         self.currHP -= hp
