@@ -1,6 +1,9 @@
 # This is the PRC configuration file for settings that are
 # used by both developer & production instances of Toontown Online.
 
+# Just testing this
+clock-frame-rate 120
+
 # Window settings
 win-origin -1 -1
 

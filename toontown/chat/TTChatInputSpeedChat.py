@@ -17,6 +17,7 @@ from toontown.shtiker.OptionsPage import speedChatStyles
 from toontown.toonbase import TTLocalizer
 from toontown.parties.PartyGlobals import ActivityIds, DecorationIds
 from toontown.toonbase import ToontownGlobals
+import inspect
 scStructure = [[OTPLocalizer.SCMenuHello,
   {100: 0},
   {101: 0},
@@ -483,7 +484,8 @@ class TTChatInputSpeedChat(DirectObject.DirectObject):
         self.toPlayer = 0
         return
 
-    def handleEmoteMsg(self, emoteId):
+    #other is here just because it is being put in as a third argument for some reason
+    def handleEmoteMsg(self, emoteId, other):
         if self.whisperAvatarId is None:
             self.chatMgr.sendSCEmoteChatMessage(emoteId)
         else:
