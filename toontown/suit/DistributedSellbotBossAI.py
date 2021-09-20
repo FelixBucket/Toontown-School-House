@@ -217,6 +217,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         self.postBattleState = 'RollToBattleTwo'
         self.initializeBattles(1, ToontownGlobals.SellbotBossBattleOnePosHpr)
 
+    '''
     def generateSuits(self, battleNumber):
         if self.nerfed:
             if battleNumber == 1:
@@ -228,6 +229,55 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
                 return self.invokeSuitPlanner(9, 0)
             else:
                 return self.invokeSuitPlanner(10, 1)
+    '''
+
+    def generateSuits(self, battleNumber):
+        if self.nerfed:
+            if battleNumber == 1:
+                cogs = self.invokeSuitPlanner(15, 0, 0)
+                executives = self.invokeSuitPlanner(15, 0, 1)
+                activeSuits = cogs['activeSuits'] + executives['activeSuits']
+                reserveSuits = cogs['reserveSuits'] + executives['reserveSuits']
+                random.shuffle(activeSuits)
+                while len(activeSuits) > 4:
+                    suit = activeSuits.pop()
+                    reserveSuits.append((suit, 100))
+            else:
+                skelecogs = self.invokeSuitPlanner(16, 1, 0)
+                executives = self.invokeSuitPlanner(16, 1, 0)
+                activeSuits = skelecogs['activeSuits'] + executives['activeSuits']
+                reserveSuits =skelecogs['reserveSuits'] + executives['reserveSuits']
+                random.shuffle(activeSuits)
+                while len(activeSuits) > 4:
+                    suit = activeSuits.pop()
+                    reserveSuits.append((suit, 100))
+
+        else:
+            if battleNumber == 1:
+                cogs = self.invokeSuitPlanner(9, 0, 0)
+                executives = self.invokeSuitPlanner(9, 0, 1)
+                activeSuits = cogs['activeSuits'] + executives['activeSuits']
+                reserveSuits = cogs['reserveSuits'] + executives['reserveSuits']
+                random.shuffle(activeSuits)
+                while len(activeSuits) > 4:
+                    suit = activeSuits.pop()
+                    reserveSuits.append((suit, 100))
+            else:
+                skelecogs = self.invokeSuitPlanner(10, 1, 0)
+                executives = self.invokeSuitPlanner(10, 1, 1)
+                activeSuits = skelecogs['activeSuits'] + executives['activeSuits']
+                reserveSuits = skelecogs['reserveSuits'] + executives['reserveSuits']
+                random.shuffle(activeSuits)
+                while len(activeSuits) > 4:
+                    suit = activeSuits.pop()
+                    reserveSuits.append((suit, 100))
+
+        def compareJoinChance(a, b):
+            return cmp(a[1], b[1])
+
+        reserveSuits.sort(compareJoinChance)
+        return {'activeSuits': activeSuits,
+         'reserveSuits': reserveSuits}
 
     def removeToon(self, avId):
         toon = simbase.air.doId2do.get(avId)
