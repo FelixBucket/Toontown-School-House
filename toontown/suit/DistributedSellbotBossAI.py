@@ -235,7 +235,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         if self.nerfed:
             if battleNumber == 1:
                 cogs = self.invokeSuitPlanner(15, 0, 0)
-                executives = self.invokeSuitPlanner(15, 0, 1)
+                executives = self.invokeSuitPlanner(17, 0, 1)
                 activeSuits = cogs['activeSuits'] + executives['activeSuits']
                 reserveSuits = cogs['reserveSuits'] + executives['reserveSuits']
                 random.shuffle(activeSuits)
@@ -244,7 +244,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
                     reserveSuits.append((suit, 100))
             else:
                 skelecogs = self.invokeSuitPlanner(16, 1, 0)
-                executives = self.invokeSuitPlanner(16, 1, 0)
+                executives = self.invokeSuitPlanner(18, 1, 0)
                 activeSuits = skelecogs['activeSuits'] + executives['activeSuits']
                 reserveSuits =skelecogs['reserveSuits'] + executives['reserveSuits']
                 random.shuffle(activeSuits)
@@ -255,7 +255,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         else:
             if battleNumber == 1:
                 cogs = self.invokeSuitPlanner(9, 0, 0)
-                executives = self.invokeSuitPlanner(9, 0, 1)
+                executives = self.invokeSuitPlanner(19, 0, 1)
                 activeSuits = cogs['activeSuits'] + executives['activeSuits']
                 reserveSuits = cogs['reserveSuits'] + executives['reserveSuits']
                 random.shuffle(activeSuits)
@@ -264,7 +264,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
                     reserveSuits.append((suit, 100))
             else:
                 skelecogs = self.invokeSuitPlanner(10, 1, 0)
-                executives = self.invokeSuitPlanner(10, 1, 1)
+                executives = self.invokeSuitPlanner(20, 1, 1)
                 activeSuits = skelecogs['activeSuits'] + executives['activeSuits']
                 reserveSuits = skelecogs['reserveSuits'] + executives['reserveSuits']
                 random.shuffle(activeSuits)
