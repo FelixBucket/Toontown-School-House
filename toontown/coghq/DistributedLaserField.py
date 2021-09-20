@@ -59,6 +59,7 @@ class DistributedLaserField(BattleBlocker.BattleBlocker):
         self.successTrack = Parallel(SoundInterval(self.successSound, node=self, volume=0.8))
         self.failSound = loader.loadSfx('phase_11/audio/sfx/LB_sparks_1.ogg')
         self.failTrack = Parallel(SoundInterval(self.failSound, node=self, volume=0.8))
+        self.interval = None
         return
 
     def generateInit(self):
@@ -691,9 +692,22 @@ class DistributedLaserField(BattleBlocker.BattleBlocker):
     def showSuit(self, suitIdarray):
         for suitId in suitIdarray:
             suit = base.cr.doId2do.get(suitId)
+            self.customSound = base.loader.loadSfx('phase_11/audio/sfx/LB_virtual_cog_appear.ogg')
             if suit:
                 suit.unstash()
                 suit.setVirtual()
+
+                '''
+                self.interval = Parallel(
+                    LerpColorInterval(suit, 1, Vec4(0.0, 1.0, 0.0, 0), Vec4(0.0, 1.0, 0.0, 1)),
+                    SoundInterval(self.customSound, node=suit),
+                )
+
+                self.interval.start()
+                if self.interval:
+                    self.interval.finish()
+                    del self.interval
+                '''
 
     def initCollisionGeom(self):
         print 'Laser Field initCollisionGeom'
