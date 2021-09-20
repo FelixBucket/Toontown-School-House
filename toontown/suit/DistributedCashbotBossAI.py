@@ -62,9 +62,8 @@ class DistributedCashbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         cogs = self.invokeSuitPlanner(11, 0, 0)
         skelecogs = self.invokeSuitPlanner(12, 1, 0)
         executives = self.invokeSuitPlanner(13, 0, 1)
-        executiveSkeletons = self.invokeSuitPlanner(14, 4, 1)
-        activeSuits = cogs['activeSuits'] + skelecogs['activeSuits'] + executives['activeSuits'] + executiveSkeletons['activeSuits']
-        reserveSuits = cogs['reserveSuits'] + skelecogs['reserveSuits'] + executives['reserveSuits'] + executiveSkeletons['reserveSuits']
+        activeSuits = cogs['activeSuits'] + skelecogs['activeSuits'] + executives['activeSuits']
+        reserveSuits = cogs['reserveSuits'] + skelecogs['reserveSuits'] + executives['reserveSuits']
         random.shuffle(activeSuits)
         while len(activeSuits) > 4:
             suit = activeSuits.pop()
