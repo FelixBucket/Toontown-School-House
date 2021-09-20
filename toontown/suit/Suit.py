@@ -869,6 +869,10 @@ class Suit(Avatar.Avatar):
             condition = 4
         else:
             condition = 5
+        if self.isVirtual:
+            if self.healthCondition != condition or forceUpdate:
+                self.updateVirtualColor(condition, forceUpdate)
+                return
         if self.healthCondition != condition or forceUpdate:
             if condition == 4:
                 blinkTask = Task.loop(Task(self.__blinkRed), Task.pause(0.75), Task(self.__blinkGray), Task.pause(0.1))
@@ -882,6 +886,49 @@ class Suit(Avatar.Avatar):
                 self.healthBar.setColor(self.healthColors[condition], 1)
                 self.healthBarGlow.setColor(self.healthGlowColors[condition], 1)
             self.healthCondition = condition
+
+    def updateVirtualColor(self, condition, forceUpdate):
+        actorNode = self.find('**/__Actor_modelRoot')
+        actorCollection = actorNode.findAllMatches('*')
+        parts = ()
+        if self.healthCondition != condition or forceUpdate:
+            for thingIndex in xrange(0, actorCollection.getNumPaths()):
+                thing = actorCollection[thingIndex]
+                if thing.getName() not in ('joint_attachMeter', 'joint_nameTag', 'def_nameTag'):
+                    if condition < 4:
+                            thing.setColorScale(self.healthColors[condition] - (0, 0, 0, 0.5))
+                    elif condition == 4:
+                        blinkTask = Task.loop(Task(self.__virtualBlinkRed), Task.pause(0.75),
+                                              Task(self.__virtualBlinkGray), Task.pause(0.1))
+                        taskMgr.add(blinkTask, self.uniqueName('virtual-blink-task'))
+                    elif condition == 5:
+                        if self.healthCondition == 4:
+                            taskMgr.remove(self.uniqueName('virtual-blink-task'))
+                        blinkTask = Task.loop(Task(self.__virtualBlinkRed), Task.pause(0.25),
+                                              Task(self.__virtualBlinkGray), Task.pause(0.1))
+                        taskMgr.add(blinkTask, self.uniqueName('virtual-blink-task'))
+                    thing.setAttrib(ColorBlendAttrib.make(ColorBlendAttrib.MAdd))
+                    thing.setDepthWrite(False)
+                    thing.setBin('fixed', 1)
+        self.healthCondition = condition
+
+    def __virtualBlinkRed(self, task):
+        actorNode = self.find('**/__Actor_modelRoot')
+        actorCollection = actorNode.findAllMatches('*')
+        for thingIndex in xrange(0, actorCollection.getNumPaths()):
+            thing = actorCollection[thingIndex]
+            if thing.getName() not in ('joint_attachMeter', 'joint_nameTag', 'def_nameTag'):
+                thing.setColorScale(self.healthColors[3] - (0, 0, 0, 0.5))
+        return Task.done
+
+    def __virtualBlinkGray(self, task):
+        actorNode = self.find('**/__Actor_modelRoot')
+        actorCollection = actorNode.findAllMatches('*')
+        for thingIndex in xrange(0, actorCollection.getNumPaths()):
+            thing = actorCollection[thingIndex]
+            if thing.getName() not in ('joint_attachMeter', 'joint_nameTag', 'def_nameTag'):
+                thing.setColorScale(self.healthColors[4] - (0, 0, 0, 0.5))
+        return Task.done
 
     def __blinkRed(self, task):
         self.healthBar.setColor(self.healthColors[3], 1)
@@ -905,6 +952,8 @@ class Suit(Avatar.Avatar):
             self.healthBar = None
         if self.healthCondition == 4 or self.healthCondition == 5:
             taskMgr.remove(self.uniqueName('blink-task'))
+            if self.isVirtual:
+                taskMgr.remove(self.uniqueName('virtual-blink-task'))
         self.healthCondition = 0
         return
 
