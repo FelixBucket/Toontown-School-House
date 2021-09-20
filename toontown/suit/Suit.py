@@ -351,6 +351,7 @@ class Suit(Avatar.Avatar):
         self.isDisguised = 0
         self.isWaiter = 0
         self.isRental = 0
+        self.isVirtual = 0
         self.setBlend(frameBlend=True)
         return
 
@@ -408,6 +409,7 @@ class Suit(Avatar.Avatar):
         self.headTexture = None
         self.loseActor = None
         self.isSkeleton = 0
+        self.isVirtual = 0
         self.setBlend(frameBlend=True)
         if dna.name == 'f':
             self.scale = 4.0 / cSize
@@ -1038,6 +1040,20 @@ class Suit(Avatar.Avatar):
                 dropShadow.reparentTo(self.shadowJoint)
         self.loop(anim)
         self.isSkeleton = 1
+
+    def makeVirtualColors(self):
+        self.isVirtual = 1
+        actorNode = self.find('**/__Actor_modelRoot')
+        actorCollection = actorNode.findAllMatches('*')
+        parts = ()
+        for thingIndex in xrange(0, actorCollection.getNumPaths()):
+            thing = actorCollection[thingIndex]
+            if thing.getName() not in ('joint_attachMeter', 'joint_nameTag', 'def_nameTag'):
+                thing.setColorScale(self.healthColors[0] - (0, 0, 0, 0.5))
+                thing.setAttrib(ColorBlendAttrib.make(ColorBlendAttrib.MAdd))
+                thing.setDepthWrite(False)
+                thing.setBin('fixed', 1)
+        self.updateHealthBar(0, forceUpdate=1)
 
     def getHeadParts(self):
         return self.headParts
