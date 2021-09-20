@@ -989,6 +989,7 @@ class Suit(Avatar.Avatar):
         dropShadow.setScale(0.45)
         dropShadow.setColor(0.0, 0.0, 0.0, 0.5)
         dropShadow.reparentTo(shadowJoint)
+        self.loseActor.setBlend(frameBlend=True)
         return self.loseActor
 
     def cleanupLoseActor(self):
