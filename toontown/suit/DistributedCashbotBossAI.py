@@ -59,9 +59,9 @@ class DistributedCashbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         self.initializeBattles(1, ToontownGlobals.CashbotBossBattleOnePosHpr)
 
     def generateSuits(self, battleNumber):
-        cogs = self.invokeSuitPlanner(11, 0)
+        cogs = self.invokeSuitPlanner(11, 0, 0)
         executives = self.invokeSuitPlanner(21, 0, 1)
-        skelecogs = self.invokeSuitPlanner(12, 1)
+        skelecogs = self.invokeSuitPlanner(12, 1, 0)
         skelecogExecutives = self.invokeSuitPlanner(22, 1, 1)
         activeSuits = cogs['activeSuits'] + skelecogs['activeSuits'] + executives['activeSuits'] + skelecogExecutives['activeSuits']
         reserveSuits = cogs['reserveSuits'] + skelecogs['reserveSuits'] + executives['reserveSuits'] + skelecogExecutives['reserveSuits']
