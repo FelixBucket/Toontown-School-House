@@ -30,6 +30,7 @@ class Kart(NodePath, ShadowCaster.ShadowCaster):
         anp = NodePath(an)
         NodePath.assign(self, anp)
         self.actorNode = an
+        self.setBlend(frameBlend=True)
         ShadowCaster.ShadowCaster.__init__(self, False)
         Kart.index += 1
         self.updateFields = []
@@ -442,6 +443,7 @@ class Kart(NodePath, ShadowCaster.ShadowCaster):
 
             return
         self.kartDNA = dna
+        self.setBlend(frameBlend=True)
 
     def setBodyType(self, bodyType):
         self.kartDNA[KartDNA.bodyType] = bodyType

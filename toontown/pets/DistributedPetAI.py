@@ -61,6 +61,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, PetLooke
         self.inEstate = 0
         self.estateOwnerId = None
         self.estateZones = []
+        self.setBlend(frameBlend=True)
         self.lastSeenTimestamp = self.getCurEpochTimestamp()
         self.requiredMoodComponents = {}
         self.__funcsToDelete = []
@@ -119,6 +120,7 @@ class DistributedPetAI(DistributedSmoothNodeAI.DistributedSmoothNodeAI, PetLooke
         self.b_setColorScale(colorScale)
         self.b_setEyeColor(eyes)
         self.b_setGender(gender)
+        self.setBlend(frameBlend=True)
 
     def handleZoneChange(self, newZoneId, oldZoneId):
         DistributedSmoothNodeAI.DistributedSmoothNodeAI.handleZoneChange(self, newZoneId, oldZoneId)

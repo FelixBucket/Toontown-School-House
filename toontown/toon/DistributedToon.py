@@ -192,6 +192,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         self.immortalMode = False
         self.unlimitedGags = False
         self.instaKill = False
+        self.setBlend(frameBlend=True)
         self.accept('f10', self.openTeleportGUI)
         return
 
@@ -296,6 +297,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         self.setGlasses(*oldGlasses)
         self.setBackpack(*oldBackpack)
         self.setShoes(*oldShoes)
+        self.setBlend(frameBlend=True)
 
     def setHat(self, idx, textureIdx, colorIdx):
         Toon.Toon.setHat(self, idx, textureIdx, colorIdx)

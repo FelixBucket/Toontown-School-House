@@ -56,6 +56,7 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
         self.skeleRevives = 0
         self.maxSkeleRevives = 0
         self.executive = 0
+        self.setBlend(frameBlend=True)
         self.sillySurgeText = False
         self.interactivePropTrackBonus = -1
         return
@@ -146,6 +147,7 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
 
     def setDNA(self, dna):
         Suit.Suit.setDNA(self, dna)
+        self.setBlend(frameBlend=True)
 
     def getHP(self):
         return self.currHP

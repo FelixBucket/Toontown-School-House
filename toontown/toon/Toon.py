@@ -504,9 +504,11 @@ class Toon(Avatar.Avatar, ToonHead):
         self.shoes = (0, 0, 0)
         self.isStunned = 0
         self.isDisguised = 0
+        self.setBlend(frameBlend=True)
         self.defaultColorScale = None
         self.jar = None
         self.bobSwim = None
+        self.setBlend(frameBlend=True)
         self.setTag('pieCode', str(ToontownGlobals.PieCodeToon))
         self.setFont(ToontownGlobals.getToonFont())
         self.soundChatBubble = base.loader.loadSfx('phase_3/audio/sfx/GUI_balloon_popup.ogg')
@@ -647,6 +649,7 @@ class Toon(Avatar.Avatar, ToonHead):
             self.generateToon()
             self.initializeDropShadow()
             self.initializeNametag3d()
+            self.setBlend(frameBlend=True)
 
     def parentToonParts(self):
         if self.hasLOD():
@@ -2745,6 +2748,7 @@ class Toon(Avatar.Avatar, ToonHead):
         suit.initializeDropShadow()
         suit.setPos(self.getPos())
         suit.setHpr(self.getHpr())
+        suit.setBlend(frameBlend=True)
         for part in suit.getHeadParts():
             part.hide()
 
@@ -2788,6 +2792,7 @@ class Toon(Avatar.Avatar, ToonHead):
         self.suit.loop('neutral')
         self.isDisguised = 1
         self.setFont(ToontownGlobals.getSuitFont())
+        self.setBlend(frameBlend=True)
         if setDisplayName:
             if hasattr(base, 'idTags') and base.idTags:
                 name = self.getAvIdName()

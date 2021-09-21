@@ -25,6 +25,7 @@ class Goon(Avatar.Avatar):
             self.strength = 15
             self.velocity = 4
             self.scale = 1.0
+            self.setBlend(frameBlend=True)
             if dnaName is not None:
                 self.initGoon(dnaName)
 
@@ -71,6 +72,7 @@ class Goon(Avatar.Avatar):
             self.generateGoon()
             self.initializeDropShadow()
             self.initializeNametag3d()
+            self.setBlend(frameBlend=True)
 
     def generateGoon(self):
         dna = self.style

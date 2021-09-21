@@ -60,6 +60,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         self.battleBNode.setPosHpr(*ToontownGlobals.BossCogBattleBPosHpr)
         self.activeIntervals = {}
         self.flashInterval = None
+        self.setBlend(frameBlend=True)
         self.elevatorType = ElevatorConstants.ELEVATOR_VP
         return
 
@@ -155,6 +156,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
 
     def setDNA(self, dna):
         BossCog.BossCog.setDNA(self, dna)
+        self.setBlend(frameBlend=True)
 
     def setToonIds(self, involvedToons, toonsA, toonsB):
         self.involvedToons = involvedToons

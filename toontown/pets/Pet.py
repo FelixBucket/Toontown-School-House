@@ -43,6 +43,7 @@ class Pet(Avatar.Avatar):
         Pet.SerialNum += 1
         self.lockedDown = 0
         self.setPickable(1)
+        self.setBlend(frameBlend=True)
         self.setPlayerType(NametagGroup.CCNonPlayer)
         self.animFSM = ClassicFSM('petAnimFSM', [State('off', self.enterOff, self.exitOff),
          State('neutral', self.enterNeutral, self.exitNeutral),
@@ -115,6 +116,7 @@ class Pet(Avatar.Avatar):
             self.initializeDropShadow()
             self.initializeNametag3d()
             self.dropShadow.setScale(0.75)
+            self.setBlend(frameBlend=True)
 
     def generatePet(self):
         self.loadModel('phase_4/models/char/TT_pets-mod')

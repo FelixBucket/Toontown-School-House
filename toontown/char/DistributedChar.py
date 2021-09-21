@@ -10,6 +10,7 @@ class DistributedChar(DistributedAvatar.DistributedAvatar, Char.Char):
             self.DistributedChar_initialized = 1
             DistributedAvatar.DistributedAvatar.__init__(self, cr)
             Char.Char.__init__(self)
+            self.setBlend(frameBlend=True)
 
     def delete(self):
         try:
@@ -24,6 +25,7 @@ class DistributedChar(DistributedAvatar.DistributedAvatar, Char.Char):
 
     def setDNA(self, dna):
         Char.Char.setDNA(self, dna)
+        self.setBlend(frameBlend=True)
 
     def playDialogue(self, *args):
         Char.Char.playDialogue(self, *args)
