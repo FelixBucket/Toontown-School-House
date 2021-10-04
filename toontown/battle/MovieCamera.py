@@ -425,6 +425,8 @@ def chooseSuitShot(attack, attackDuration):
         camTrack.append(defaultCamera(openShotDuration=2.3))
     elif name == PICK_POCKET:
         camTrack.append(allGroupLowShot(suit, 2.7))
+    elif name == MEME_STEAL:
+        camTrack.append(allGroupLowShot(suit, 2.7))
     elif name == PINK_SLIP:
         camTrack.append(defaultCamera(openShotDuration=2.8))
     elif name == POUND_KEY:

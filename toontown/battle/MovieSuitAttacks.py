@@ -192,6 +192,8 @@ def doSuitAttack(attack):
         suitTrack = doPeckingOrder(attack)
     elif name == PICK_POCKET:
         suitTrack = doPickPocket(attack)
+    elif name == MEME_STEAL:
+        suitTrack = doMemeSteal(attack)
     elif name == PINK_SLIP:
         suitTrack = doPinkSlip(attack)
     elif name == PLAY_HARDBALL:
@@ -2242,6 +2244,23 @@ def doPickPocket(attack):
     multiTrackList = Parallel(suitTrack, toonTrack)
     if dmg > 0:
         soundTrack = getSoundTrack('SA_pick_pocket.ogg', delay=0.2, node=suit)
+        multiTrackList.append(billPropTrack)
+        multiTrackList.append(soundTrack)
+    return multiTrackList
+
+def doMemeSteal(attack):
+    suit = attack['suit']
+    battle = attack['battle']
+    target = attack['target']
+    dmg = target['hp']
+    bill = globalPropPool.getProp('pad')
+    suitTrack = getSuitTrack(attack)
+    billPosPoints = [Point3(-0.01, 0.45, -0.25), VBase3(136.424, -46.434, -129.712)]
+    billPropTrack = getPropTrack(bill, suit.getRightHand(), billPosPoints, 0.6, 0.55, scaleUpPoint=Point3(1.41, 1.41, 1.41))
+    toonTrack = getToonTrack(attack, 0.6, ['cringe'], 0.01, ['sidestep'])
+    multiTrackList = Parallel(suitTrack, toonTrack)
+    if dmg > 0:
+        soundTrack = getSoundTrack('SA_guilt_trip.ogg', delay=0.2, node=suit)
         multiTrackList.append(billPropTrack)
         multiTrackList.append(soundTrack)
     return multiTrackList

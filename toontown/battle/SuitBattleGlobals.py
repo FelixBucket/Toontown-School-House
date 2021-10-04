@@ -543,7 +543,12 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky, # cog name
                 ('PickPocket',
                     (2,2,3,4,6),
                     (95,95,95,95,95),
-                    (40,40,40,40,40)))},
+                    (40,40,40,40,40)),
+                 ('MemeSteal',
+                  (69, 69, 69, 69, 69),
+                  (95, 95, 95, 95, 95),
+                  (0, 0, 0, 0, 0)),
+                 )},
  'pp': {'name': TTLocalizer.SuitPennyPincher,
         'singularname': TTLocalizer.SuitPennyPincherS,
         'pluralname': TTLocalizer.SuitPennyPincherP,
@@ -943,6 +948,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'Legalese': ('speak', ATK_TGT_SINGLE),
  'Liquidate': ('magic1', ATK_TGT_SINGLE),
  'MarketCrash': ('throw-paper', ATK_TGT_SINGLE),
+ 'MemeSteal': ('pickpocket', ATK_TGT_SINGLE),
  'MumboJumbo': ('speak', ATK_TGT_SINGLE),
  'ParadigmShift': ('magic2', ATK_TGT_GROUP),
  'PeckingOrder': ('throw-object', ATK_TGT_SINGLE),
@@ -1010,6 +1016,7 @@ JARGON = SuitAttacks.keys().index('Jargon')
 LEGALESE = SuitAttacks.keys().index('Legalese')
 LIQUIDATE = SuitAttacks.keys().index('Liquidate')
 MARKET_CRASH = SuitAttacks.keys().index('MarketCrash')
+MEME_STEAL = SuitAttacks.keys().index('MemeSteal')
 MUMBO_JUMBO = SuitAttacks.keys().index('MumboJumbo')
 PARADIGM_SHIFT = SuitAttacks.keys().index('ParadigmShift')
 PECKING_ORDER = SuitAttacks.keys().index('PeckingOrder')
