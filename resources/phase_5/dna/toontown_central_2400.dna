@@ -1,0 +1,536 @@
+store_suit_point [ 0, STREET_POINT, 27.5632 14.9377 -0.4 ]
+store_suit_point [ 1, STREET_POINT, 45 15 -0.4 ]
+store_suit_point [ 2, FRONT_DOOR_POINT, 45 4 0 ]
+store_suit_point [ 3, SIDE_DOOR_POINT, 27.1342 0.477932 0 ]
+store_suit_point [ 4, STREET_POINT, 80 15 -0.4 ]
+store_suit_point [ 5, STREET_POINT, 115 15 -0.4 ]
+store_suit_point [ 6, STREET_POINT, 115 25 -0.400002 ]
+store_suit_point [ 7, STREET_POINT, 45 25 -0.4 ]
+store_suit_point [ 8, STREET_POINT, 27.8337 24.8854 -0.4 ]
+store_suit_point [ 9, STREET_POINT, 57.8407 24.9482 -0.4 ]
+store_suit_point [ 10, FRONT_DOOR_POINT, 57.0452 36.7137 0 ]
+store_suit_point [ 11, SIDE_DOOR_POINT, 78.5928 39.9218 0 ]
+group "toontownCentral" [
+ visgroup "2401" [
+  vis [   "2401"   "2402"   "2403"   ]
+  suit_edge [ 8 0 ]
+  suit_edge [ 0 1 ]
+  suit_edge [ 1 2 ]
+  suit_edge [ 2 1 ]
+  suit_edge [ 0 3 ]
+  suit_edge [ 3 0 ]
+  suit_edge [ 1 4 ]
+  suit_edge [ 7 2 ]
+  suit_edge [ 2 7 ]
+  suit_edge [ 7 8 ]
+  suit_edge [ 6 9 ]
+  suit_edge [ 9 10 ]
+  suit_edge [ 10 9 ]
+  suit_edge [ 9 11 ]
+  suit_edge [ 11 9 ]
+  suit_edge [ 4 11 ]
+  suit_edge [ 11 4 ]
+  battle_cell [ 30 30 44.9642 19.5292 -0.5 ]
+  group "streets" [
+   street "str.40x40_DNARoot" [
+    code [ "street_40x40" ]
+    pos [ 0 0 0 ]
+    nhpr [ 0 0 0 ]
+    texture [ "street_street_TT_tex" ]
+    texture [ "street_sidewalk_TT_tex" ]
+    texture [ "street_curb_TT_tex" ]
+   ]
+   street "str.40x40_DNARoot" [
+    code [ "street_40x40" ]
+    pos [ 40 0 0 ]
+    nhpr [ -0 0 -0 ]
+    texture [ "street_street_TT_tex" ]
+    texture [ "street_sidewalk_TT_tex" ]
+    texture [ "street_curb_TT_tex" ]
+   ]
+  ]
+  group "buildings" [
+   prop "linktunnel_tt_2000_DNARoot" [
+    code [ "prop_safe_zone_entrance_tunnel" ]
+    pos [ 0 0 0 ]
+    nhpr [ 90 0 -0 ]
+    sign [
+     code [ "tunnel_sign_orange" ]
+     pos [ 0 0 -3.2 ]
+     scale [ 1.5 1 1.5 ]
+     baseline [
+      code [ "mickey" ]
+      color [ 0 0.501961 0 1 ]
+      pos [ 0 0 -1.16 ]
+      scale [ 1.5 1 1.5 ]
+      width [ 47.4001 ]
+      height [ 47.4001 ]
+      text [
+       letters [ "P" ]
+      ]
+      text [
+       letters [ "L" ]
+      ]
+      text [
+       letters [ "A" ]
+      ]
+      text [
+       letters [ "Y" ]
+      ]
+      text [
+       letters [ "G" ]
+      ]
+      text [
+       letters [ "R" ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "U" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "D" ]
+      ]
+     ]
+     baseline [
+      pos [ 0 0 1.5 ]
+      scale [ 2.5 1 2.5 ]
+      graphic [
+       code [ "mickeySZ" ]
+      ]
+     ]
+     baseline [
+      code [ "mickey" ]
+      color [ 0 0.501961 0.25098 1 ]
+      pos [ 0 0 -2.03 ]
+      scale [ 0.8 1 0.8 ]
+      width [ 39.6338 ]
+      height [ 39.6338 ]
+      text [
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "O" ]
+      ]
+      text [
+       letters [ "W" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "C" ]
+      ]
+      text [
+       letters [ "E" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "T" ]
+      ]
+      text [
+       letters [ "R" ]
+      ]
+      text [
+       letters [ "A" ]
+      ]
+      text [
+       letters [ "L" ]
+      ]
+     ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 20 5.34058e-05 0 ]
+    nhpr [ -180 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb4:flat_DNARoot" [
+    pos [ 35 0 0 ]
+    nhpr [ 180 0 -0 ]
+    width [ 15 ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_pillars_ur" ]
+     color [ 1 1 0.59 1 ]
+     cornice [
+      code [ "cornice_stone_ur" ]
+      color [ 1 0.92 0.59 1 ]
+     ]
+     flat_door [
+      code [ "door_single_square_ur" ]
+      color [ 1 1 1 1 ]
+     ]
+    ]
+   ]
+   landmark_building "tb4:toon_landmark_TT_C1_DNARoot" [
+    code [ "toon_landmark_TT_C1" ]
+    title [ "Richtofen's Dichtofens" ]
+    pos [ 55 0 0 ]
+    nhpr [ 180 0 -0 ]
+    door [
+     code [ "door_double_square_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+    sign [
+     code [ "TTC_sign2" ]
+     baseline [
+      code [ "TT_Comedy" ]
+      color [ 0 0 0 1 ]
+      scale [ 0.7 1 0.7 ]
+      text [
+       letters [ "R" ]
+      ]
+      text [
+       letters [ "i" ]
+      ]
+      text [
+       letters [ "c" ]
+      ]
+      text [
+       letters [ "h" ]
+      ]
+      text [
+       letters [ "t" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "f" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ "n" ]
+      ]
+      text [
+       letters [ "'" ]
+      ]
+      text [
+       letters [ "s" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "D" ]
+      ]
+      text [
+       letters [ "i" ]
+      ]
+      text [
+       letters [ "c" ]
+      ]
+      text [
+       letters [ "h" ]
+      ]
+      text [
+       letters [ "t" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "f" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ "n" ]
+      ]
+      text [
+       letters [ "s" ]
+      ]
+     ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 14.9995 39.9997 0 ]
+    nhpr [ -0 0 -0 ]
+    width [ 15 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ -0.000455856 39.9997 0 ]
+    nhpr [ -0 0 -0 ]
+    width [ 15 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb5:flat_DNARoot" [
+    pos [ 29.9995 39.9997 0 ]
+    nhpr [ 0 0 0 ]
+    width [ 15.6 ]
+    wall [
+     height [ 4 ]
+     code [ "wall_basement_brick_ur" ]
+     color [ 0.11 0.8 0.22 1 ]
+     windows [
+      code [ "window_sm_pointed_ur" ]
+      color [ 0.27 1 0.42 1 ]
+      count [ 0 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.99 0.89 0.49 1 ]
+     windows [
+      code [ "window_sm_curved_ur" ]
+      color [ 1 1 0.49 1 ]
+      count [ 1 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.996078 0.690196 0.486275 1 ]
+     windows [
+      code [ "window_sm_curved_ul" ]
+      color [ 0.996078 0.996078 0.486275 1 ]
+      count [ 2 ]
+     ]
+    ]
+    prop "prop.neighborhood_sign_tt_DNARoot" [
+     code [ "neighborhood_sign_TT" ]
+     pos [ 0.000499725 -4.9997 0 ]
+     nhpr [ 180 0 0 ]
+    ]
+   ]
+   landmark_building "tb5:toon_landmark_TT_A2_DNARoot" [
+    code [ "toon_landmark_TT_A2" ]
+    title [ "Some New Building" ]
+    pos [ 45.5995 39.9997 0 ]
+    nhpr [ 0 0 0 ]
+    door [
+     code [ "door_double_square_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+    sign [
+     code [ "sign_general1" ]
+     baseline [
+      code [ "humanist" ]
+      color [ 0 0 0 1 ]
+      scale [ 0.7 1 0.7 ]
+      text [
+       letters [ "S" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "m" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ "w" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "B" ]
+      ]
+      text [
+       letters [ "u" ]
+      ]
+      text [
+       letters [ "i" ]
+      ]
+      text [
+       letters [ "l" ]
+      ]
+      text [
+       letters [ "d" ]
+      ]
+      text [
+       letters [ "i" ]
+      ]
+      text [
+       letters [ "n" ]
+      ]
+      text [
+       letters [ "g" ]
+      ]
+     ]
+    ]
+   ]
+   flat_building "tb5:flat_DNARoot" [
+    pos [ 70.5995 39.9997 0 ]
+    nhpr [ 0 0 0 ]
+    width [ 15 ]
+    wall [
+     height [ 20 ]
+     code [ "wall_sm_brick_ur" ]
+     color [ 1 0.67451 0.592157 1 ]
+     windows [
+      code [ "window_sm_pointed_ul" ]
+      color [ 0.88189 0.439216 0.145252 1 ]
+      count [ 2 ]
+     ]
+     flat_door [
+      code [ "door_single_shuttered_ur" ]
+      color [ 1 1 1 1 ]
+     ]
+    ]
+    prop "prop.prop_tree_small_brickbox_ul_DNARoot" [
+     code [ "prop_tree_small_brickbox_ul" ]
+     pos [ 24.4 -5 0 ]
+     nhpr [ 0 0 0 ]
+    ]
+   ]
+  ]
+  group "props" [
+   prop "prop.prop_tree_large_ul_DNARoot" [
+    code [ "prop_tree_large_ul" ]
+    pos [ 10 -10 0 ]
+    nhpr [ -0 0 -0 ]
+   ]
+   prop "prop.prop_tree_large_brickbox_ul_DNARoot" [
+    code [ "prop_tree_large_brickbox_ul" ]
+    pos [ 17 36 0 ]
+    nhpr [ 0 0 0 ]
+   ]
+  ]
+ ]
+ visgroup "2402" [
+  vis [   "2401"   "2402"   "2403"   ]
+  suit_edge [ 4 5 ]
+  suit_edge [ 5 6 ]
+  suit_edge [ 6 7 ]
+  battle_cell [ 20 20 100.971 20.4978 -0.5 ]
+  group "streets" [
+   street "str.40x40_DNARoot" [
+    code [ "street_40x40" ]
+    pos [ 80 0 0 ]
+    nhpr [ -0 0 -0 ]
+    texture [ "street_street_TT_tex" ]
+    texture [ "street_sidewalk_TT_tex" ]
+    texture [ "street_curb_TT_tex" ]
+   ]
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2403" [
+  vis [   "2401"   "2402"   "2403"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2404" [
+  vis [   "2404"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2405" [
+  vis [   "2405"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2406" [
+  vis [   "2406"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2407" [
+  vis [   "2407"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2408" [
+  vis [   "2408"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2409" [
+  vis [   "2409"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+ visgroup "2410" [
+  vis [   "2410"   ]
+  group "streets" [
+  ]
+  group "buildings" [
+  ]
+  group "props" [
+  ]
+ ]
+]
