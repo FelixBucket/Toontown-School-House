@@ -8,6 +8,8 @@ from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownBattleGlobals
 import sys, os
 import string
+import json
+import string
 QUEST_MOVIE_CLEAR = 0
 QUEST_MOVIE_REJECT = 1
 QUEST_MOVIE_COMPLETE = 2
@@ -2062,20 +2064,20 @@ NPCToonDict = {20000: (-1,
         NPC_FISHERMAN),
  2322: (2403,
         lnames[2322],
-        ('fsl',
-         'ss',
-         'l',
+        ('css',
+         'ms',
          'm',
-         21,
+         'm',
+         8,
          0,
-         21,
-         21,
-         1,
-         5,
-         1,
-         5,
-         0,
-         12),
+         8,
+         8,
+         82,
+         27,
+         71,
+         27,
+         30,
+         27),
         'm',
         0,
         NPC_FISHERMAN),

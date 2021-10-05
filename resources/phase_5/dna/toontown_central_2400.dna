@@ -647,11 +647,12 @@ group "toontownCentral" [
   suit_edge [ 5 12 ]
   suit_edge [ 12 13 ]
   suit_edge [ 15 16 ]
+  battle_cell [ 20 20 138.817 21.856 -0.5 ]
   group "streets" [
    street "str.full_corner_DNARoot" [
     code [ "street_full_corner" ]
     pos [ 160 40 0 ]
-    nhpr [ 180 0 -0 ]
+    nhpr [ -180 0 -0 ]
     texture [ "street_street_TT_tex" ]
     texture [ "street_sidewalk_TT_tex" ]
     texture [ "street_curb_TT_tex" ]
@@ -863,6 +864,7 @@ group "toontownCentral" [
   vis [   "2404"   "2403"   "2402"   "2401"   ]
   suit_edge [ 13 14 ]
   suit_edge [ 14 15 ]
+  battle_cell [ 20 20 140.21 58.4849 -0.500002 ]
   group "streets" [
    street "str.40x40_DNARoot" [
     code [ "street_40x40" ]
