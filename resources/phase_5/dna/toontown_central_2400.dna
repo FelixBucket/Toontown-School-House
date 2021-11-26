@@ -1,6 +1,5 @@
 store_suit_point [ 0, STREET_POINT, 27.5632 14.9377 -0.4 ]
 store_suit_point [ 1, STREET_POINT, 45 15 -0.4 ]
-store_suit_point [ 2, FRONT_DOOR_POINT, 45 4 0 ]
 store_suit_point [ 3, SIDE_DOOR_POINT, 27.1342 0.477932 0 ]
 store_suit_point [ 4, STREET_POINT, 80 15 -0.4 ]
 store_suit_point [ 5, STREET_POINT, 115 15 -0.4 ]
@@ -8,12 +7,10 @@ store_suit_point [ 6, STREET_POINT, 115 25 -0.400002 ]
 store_suit_point [ 7, STREET_POINT, 45 25 -0.4 ]
 store_suit_point [ 8, STREET_POINT, 27.8337 24.8854 -0.4 ]
 store_suit_point [ 9, STREET_POINT, 57.8407 24.9482 -0.4 ]
-store_suit_point [ 10, FRONT_DOOR_POINT, 57.0452 36.7137 0 ]
 store_suit_point [ 11, SIDE_DOOR_POINT, 78.5928 39.9218 0 ]
 store_suit_point [ 12, STREET_POINT, 145 15 -0.4 ]
 store_suit_point [ 13, STREET_POINT, 144.999 39.9999 -0.4 ]
 store_suit_point [ 16, STREET_POINT, 134.999 24.9999 -0.400002 ]
-store_suit_point [ 17, FRONT_DOOR_POINT, 100.991 2.66245 4 ]
 store_suit_point [ 18, SIDE_DOOR_POINT, 86.9425 -0.41964 0 ]
 store_suit_point [ 19, STREET_POINT, 145 80 -0.399995 ]
 store_suit_point [ 20, STREET_POINT, 145 120 4.6 ]
@@ -22,31 +19,34 @@ store_suit_point [ 22, STREET_POINT, 135 145 4.6 ]
 store_suit_point [ 23, STREET_POINT, 135 160 4.6 ]
 store_suit_point [ 24, STREET_POINT, 134.41 197.231 9.2 ]
 store_suit_point [ 25, STREET_POINT, 124.859 197.212 9.2 ]
-store_suit_point [ 26, STREET_POINT, 124.999 160 5 ]
+store_suit_point [ 26, STREET_POINT, 124.999 160 4.6 ]
 store_suit_point [ 27, STREET_POINT, 124.999 135 4.6 ]
 store_suit_point [ 28, STREET_POINT, 134.999 135 4.6 ]
 store_suit_point [ 29, STREET_POINT, 134.999 120 4.6 ]
 store_suit_point [ 30, STREET_POINT, 134.999 79.9999 -0.399998 ]
+store_suit_point [ 31, SIDE_DOOR_POINT, 159.91 142.34 5 ]
+store_suit_point [ 32, FRONT_DOOR_POINT, 156.566 124.743 5 ]
+store_suit_point [ 33, FRONT_DOOR_POINT, 102.117 3.1455 5 ]
+store_suit_point [ 34, FRONT_DOOR_POINT, 57.651 36.5125 -3.8147e-06 ]
+store_suit_point [ 35, FRONT_DOOR_POINT, 45.1603 3.61554 0 ]
 group "toontownCentral" [
  visgroup "2401" [
   vis [   "2401"   "2402"   "2403"   "2404"   "2405"   "2406"   "2407"   ]
   suit_edge [ 8 0 ]
   suit_edge [ 0 1 ]
-  suit_edge [ 1 2 ]
-  suit_edge [ 2 1 ]
   suit_edge [ 0 3 ]
   suit_edge [ 3 0 ]
   suit_edge [ 1 4 ]
-  suit_edge [ 7 2 ]
-  suit_edge [ 2 7 ]
   suit_edge [ 7 8 ]
   suit_edge [ 6 9 ]
-  suit_edge [ 9 10 ]
-  suit_edge [ 10 9 ]
   suit_edge [ 9 11 ]
   suit_edge [ 11 9 ]
   suit_edge [ 4 11 ]
   suit_edge [ 11 4 ]
+  suit_edge [ 9 34 ]
+  suit_edge [ 34 9 ]
+  suit_edge [ 1 35 ]
+  suit_edge [ 35 1 ]
   battle_cell [ 30 30 44.9642 19.5292 -0.5 ]
   group "streets" [
    street "str.40x40_DNARoot" [
@@ -59,7 +59,7 @@ group "toontownCentral" [
    ]
    street "str.40x40_DNARoot" [
     code [ "street_40x40" ]
-    pos [ 40 2.38419e-06 0 ]
+    pos [ 40 2.28882e-05 0 ]
     nhpr [ -0 0 -0 ]
     texture [ "street_street_TT_tex" ]
     texture [ "street_sidewalk_TT_tex" ]
@@ -492,15 +492,17 @@ group "toontownCentral" [
   suit_edge [ 5 6 ]
   suit_edge [ 6 7 ]
   suit_edge [ 16 6 ]
-  suit_edge [ 5 17 ]
-  suit_edge [ 17 5 ]
   suit_edge [ 4 18 ]
   suit_edge [ 18 4 ]
+  suit_edge [ 6 33 ]
+  suit_edge [ 33 6 ]
+  suit_edge [ 5 33 ]
+  suit_edge [ 33 5 ]
   battle_cell [ 20 20 100.971 20.4978 -0.5 ]
   group "streets" [
    street "str.40x40_DNARoot" [
     code [ "street_40x40" ]
-    pos [ 79.9998 1.00136e-05 0 ]
+    pos [ 79.9998 1.14441e-05 0 ]
     nhpr [ -0 0 -0 ]
     texture [ "street_street_TT_tex" ]
     texture [ "street_sidewalk_TT_tex" ]
@@ -550,8 +552,8 @@ group "toontownCentral" [
    landmark_building "tb9:toon_landmark_TT_B2_raised_DNARoot" [
     code [ "toon_landmark_TT_B2_raised" ]
     title [ "" ]
-    pos [ 109.998 9.91821e-05 0 ]
-    nhpr [ 180 0 -0 ]
+    pos [ 109.998 0.000183105 0 ]
+    nhpr [ -180 0 -0 ]
     door [
      code [ "door_double_clothesshop_ur" ]
      color [ 1 1 1 1 ]
@@ -591,35 +593,6 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb9:flat_DNARoot" [
-    pos [ 119.999 -39.9991 0 ]
-    nhpr [ 90 0 -0 ]
-    width [ 20 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_sm_brick_ur" ]
-     color [ 1 0.84 0.59 1 ]
-    ]
-    wall [
-     height [ 10 ]
-     code [ "wall_sm_brick_ur" ]
-     color [ 1 0.84 0.59 1 ]
-    ]
-    wall [
-     height [ 10 ]
-     code [ "wall_sm_brick_ur" ]
-     color [ 1 0.67451 0.592157 1 ]
-     windows [
-      code [ "window_sm_pointed_ul" ]
-      color [ 0.88189 0.439216 0.145252 1 ]
-      count [ 2 ]
-     ]
-     cornice [
-      code [ "cornice_stone_ur" ]
-      color [ 1 1 1 1 ]
-     ]
-    ]
-   ]
-   flat_building "tb9:flat_DNARoot" [
     pos [ 119.999 -19.9993 0 ]
     nhpr [ 90 0 -0 ]
     width [ 20 ]
@@ -648,6 +621,93 @@ group "toontownCentral" [
      ]
     ]
    ]
+   flat_building "tb9:flat_DNARoot" [
+    pos [ 100.6 39.9997 0 ]
+    nhpr [ -0 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 4 ]
+     code [ "wall_basement_brick_ur" ]
+     color [ 0.42 0.39 0.61 1 ]
+     windows [
+      code [ "window_sm_pointed_ur" ]
+      color [ 0.27 1 0.42 1 ]
+      count [ 0 ]
+     ]
+    ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_blank_ur" ]
+     color [ 1 0.7 0.27 1 ]
+     windows [
+      code [ "window_sm_curved_ur" ]
+      color [ 0.95 0.89 0.17 1 ]
+      count [ 1 ]
+     ]
+     cornice [
+      code [ "cornice_curved_ur" ]
+      color [ 0.79 0.36 0.19 1 ]
+     ]
+    ]
+   ]
+   flat_building "tb9:flat_DNARoot" [
+    pos [ 85.5995 39.9997 0 ]
+    nhpr [ -0 0 -0 ]
+    width [ 15 ]
+    wall [
+     height [ 4 ]
+     code [ "wall_basement_brick_ur" ]
+     color [ 0.42 0.39 0.61 1 ]
+     windows [
+      code [ "window_sm_pointed_ur" ]
+      color [ 0.27 1 0.42 1 ]
+      count [ 0 ]
+     ]
+    ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_blank_ur" ]
+     color [ 1 0.7 0.27 1 ]
+     windows [
+      code [ "window_sm_curved_ul" ]
+      color [ 0.95 0.89 0.17 1 ]
+      count [ 2 ]
+     ]
+     cornice [
+      code [ "cornice_curved_ur" ]
+      color [ 0.79 0.36 0.19 1 ]
+     ]
+    ]
+   ]
+   flat_building "tb9:flat_DNARoot" [
+    pos [ 119.999 -39.9991 0 ]
+    nhpr [ 90 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_brick_ur" ]
+     color [ 1 0.84 0.59 1 ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_brick_ur" ]
+     color [ 1 0.84 0.59 1 ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_brick_ur" ]
+     color [ 1 0.67451 0.592157 1 ]
+     windows [
+      code [ "window_sm_pointed_ul" ]
+      color [ 0.88189 0.439216 0.145252 1 ]
+      count [ 2 ]
+     ]
+     cornice [
+      code [ "cornice_stone_ur" ]
+      color [ 1 1 1 1 ]
+     ]
+    ]
+   ]
   ]
   group "props" [
   ]
@@ -661,7 +721,7 @@ group "toontownCentral" [
    street "str.full_corner_DNARoot" [
     code [ "street_full_corner" ]
     pos [ 160 40 0 ]
-    nhpr [ -180 0 -0 ]
+    nhpr [ 180 0 -0 ]
     texture [ "street_street_TT_tex" ]
     texture [ "street_sidewalk_TT_tex" ]
     texture [ "street_curb_TT_tex" ]
@@ -677,7 +737,7 @@ group "toontownCentral" [
    street "str.park_interior_40x40_DNARoot" [
     code [ "street_park_interior_40x40" ]
     pos [ 179.999 -19.9997 0 ]
-    nhpr [ -180 0 -0 ]
+    nhpr [ 180 0 -0 ]
     texture [ "street_street_TT_tex" ]
     texture [ "street_sidewalk_TT_tex" ]
     texture [ "street_curb_TT_tex" ]
@@ -685,7 +745,7 @@ group "toontownCentral" [
    street "str.park_interior_40x40_DNARoot" [
     code [ "street_park_interior_40x40" ]
     pos [ 179.999 20.0001 0 ]
-    nhpr [ -180 0 -0 ]
+    nhpr [ 180 0 -0 ]
     texture [ "street_street_TT_tex" ]
     texture [ "street_sidewalk_TT_tex" ]
     texture [ "street_curb_TT_tex" ]
@@ -701,27 +761,37 @@ group "toontownCentral" [
   ]
   group "buildings" [
    flat_building "tb0:flat_DNARoot" [
-    pos [ 179.998 -39.9993 0 ]
-    nhpr [ 180 0 -0 ]
-    width [ 20 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-   ]
-   flat_building "tb0:flat_DNARoot" [
-    pos [ 159.998 -39.9993 0 ]
-    nhpr [ 180 0 -0 ]
-    width [ 20 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-   ]
-   flat_building "tb0:flat_DNARoot" [
     pos [ 139.999 -39.9994 0 ]
+    nhpr [ 180 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 159.999 -39.9993 0 ]
+    nhpr [ 180 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 179.999 -39.9994 0 ]
+    nhpr [ 180 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 199.999 -39.9993 0 ]
     nhpr [ -180 0 -0 ]
     width [ 20 ]
     wall [
@@ -731,38 +801,18 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 -39.9993 0 ]
+    pos [ 199.999 -29.9994 0 ]
+    nhpr [ -90 0 -0 ]
+    width [ 10 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 209.999 -29.9995 0 ]
     nhpr [ 180 0 -0 ]
-    width [ 20 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-   ]
-   flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 20.0007 0 ]
-    nhpr [ -90 0 -0 ]
-    width [ 20 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-   ]
-   flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 40.0006 0 ]
-    nhpr [ -90 0 -0 ]
-    width [ 20 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-   ]
-   flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 0.000587463 0 ]
-    nhpr [ -90 0 -0 ]
     width [ 10 ]
     wall [
      height [ 10 ]
@@ -771,17 +821,7 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 -29.9993 0 ]
-    nhpr [ -90 0 -0 ]
-    width [ 10 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-   ]
-   flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 -39.9993 0 ]
+    pos [ 199.999 -39.9994 0 ]
     nhpr [ 90 0 -0 ]
     width [ 10 ]
     wall [
@@ -791,7 +831,37 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 -9.99941 0 ]
+    pos [ 199.999 -39.9995 0 ]
+    nhpr [ 45 -0 0 ]
+    width [ 15 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 209.996 -9.99938 0 ]
+    nhpr [ 135 0 -0 ]
+    width [ 15 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 199.996 -9.99938 0 ]
+    nhpr [ -0 0 -0 ]
+    width [ 10 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 199.997 -9.99943 0 ]
     nhpr [ 90 0 0 ]
     width [ 10 ]
     wall [
@@ -801,9 +871,9 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 -9.99941 0 ]
-    nhpr [ 0 0 0 ]
-    width [ 10 ]
+    pos [ 199.997 35.0005 0 ]
+    nhpr [ -90 0 -0 ]
+    width [ 25 ]
     wall [
      height [ 10 ]
      code [ "wall_fence_wood_ur" ]
@@ -811,19 +881,9 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb0:flat_DNARoot" [
-    pos [ 209.997 -29.9994 0 ]
-    nhpr [ -180 0 0 ]
-    width [ 10 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-   ]
-   flat_building "tb0:flat_DNARoot" [
-    pos [ 209.997 -9.99938 0 ]
-    nhpr [ 135 0 -0 ]
-    width [ 15 ]
+    pos [ 199.997 10.0005 0 ]
+    nhpr [ -90 0 -0 ]
+    width [ 20 ]
     wall [
      height [ 10 ]
      code [ "wall_fence_wood_ur" ]
@@ -894,7 +954,17 @@ group "toontownCentral" [
   ]
   group "buildings" [
    flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 60.0007 0 ]
+    pos [ 199.997 60.0002 0 ]
+    nhpr [ -90 0 -0 ]
+    width [ 25 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_fence_wood_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 199.997 80 0 ]
     nhpr [ -90 0 -0 ]
     width [ 20 ]
     wall [
@@ -904,33 +974,121 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb0:flat_DNARoot" [
-    pos [ 199.997 80.0009 0 ]
-    nhpr [ -90 0 -0 ]
+    pos [ 119.997 59.9999 0 ]
+    nhpr [ 90 0 -0 ]
     width [ 20 ]
     wall [
-     height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
+     height [ 4 ]
+     code [ "wall_basement_brick_ur" ]
+     color [ 0.99 0.69 0.49 1 ]
+     windows [
+      code [ "window_sm_pointed_ur" ]
+      color [ 0.27 1 0.42 1 ]
+      count [ 0 ]
+     ]
+    ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_blank_ur" ]
+     color [ 1 0.7 0.27 1 ]
+     windows [
+      code [ "window_sm_curved_ul" ]
+      color [ 0.95 0.89 0.17 1 ]
+      count [ 2 ]
+     ]
+     cornice [
+      code [ "cornice_curved_ur" ]
+      color [ 0.79 0.36 0.19 1 ]
+     ]
     ]
    ]
    flat_building "tb0:flat_DNARoot" [
-    pos [ 179.999 79.9999 0 ]
-    nhpr [ 0 0 0 ]
+    pos [ 119.997 39.9999 0 ]
+    nhpr [ 90 0 -0 ]
     width [ 20 ]
     wall [
+     height [ 4 ]
+     code [ "wall_basement_brick_ur" ]
+     color [ 0.25 0.65 0.29 1 ]
+     windows [
+      code [ "window_sm_pointed_ur" ]
+      color [ 0.27 1 0.42 1 ]
+      count [ 0 ]
+     ]
+    ]
+    wall [
      height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 1 0.42 0.27 1 ]
+     windows [
+      code [ "window_porthole_ul" ]
+      color [ 0.31 0.63 0.37 1 ]
+      count [ 2 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 1 0.71 0.27 1 ]
+     windows [
+      code [ "window_sm_curved_ul" ]
+      color [ 1 0.87 0.38 1 ]
+      count [ 2 ]
+     ]
+     cornice [
+      code [ "cornice_marble_ur" ]
+      color [ 1 0.42 0.27 1 ]
+     ]
     ]
    ]
-   flat_building "tb0:flat_DNARoot" [
-    pos [ 159.999 79.9999 0 ]
-    nhpr [ 0 0 0 ]
+   flat_building "tb15:flat_DNARoot" [
+    pos [ 159.997 80 0 ]
+    nhpr [ -0 0 -0 ]
     width [ 20 ]
     wall [
+     height [ 20 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.21 0.73 0.31 1 ]
+     windows [
+      code [ "window_md_curved_ul" ]
+      color [ 0.59 1 0.49 1 ]
+      count [ 2 ]
+     ]
+    ]
+    wall [
      height [ 10 ]
-     code [ "wall_fence_wood_ur" ]
-     color [ 1 1 1 1 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.21 0.73 0.31 1 ]
+     windows [
+      code [ "window_md_curved_ul" ]
+      color [ 0.59 1 0.49 1 ]
+      count [ 2 ]
+     ]
+    ]
+   ]
+   flat_building "tb15:flat_DNARoot" [
+    pos [ 179.997 80 0 ]
+    nhpr [ -0 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 20 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.21 0.73 0.31 1 ]
+     windows [
+      code [ "window_md_curved_ur" ]
+      color [ 0.59 1 0.49 1 ]
+      count [ 1 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.21 0.73 0.31 1 ]
+     windows [
+      code [ "window_md_curved_ur" ]
+      color [ 0.59 1 0.49 1 ]
+      count [ 1 ]
+     ]
     ]
    ]
   ]
@@ -951,6 +1109,124 @@ group "toontownCentral" [
    ]
   ]
   group "buildings" [
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 119.997 99.9999 0 ]
+    nhpr [ 90 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 4 ]
+     code [ "wall_basement_brick_ur" ]
+     color [ 0.99 0.69 0.49 1 ]
+     windows [
+      code [ "window_sm_pointed_ur" ]
+      color [ 0.27 1 0.42 1 ]
+      count [ 0 ]
+     ]
+    ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_blank_ur" ]
+     color [ 1 0.7 0.27 1 ]
+     windows [
+      code [ "window_sm_curved_ul" ]
+      color [ 0.95 0.89 0.17 1 ]
+      count [ 2 ]
+     ]
+     cornice [
+      code [ "cornice_curved_ur" ]
+      color [ 0.79 0.36 0.19 1 ]
+     ]
+    ]
+   ]
+   flat_building "tb0:flat_DNARoot" [
+    pos [ 119.997 79.9999 0 ]
+    nhpr [ 90 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 4 ]
+     code [ "wall_basement_brick_ur" ]
+     color [ 0.11 0.8 0.22 1 ]
+     windows [
+      code [ "window_sm_pointed_ur" ]
+      color [ 0.27 1 0.42 1 ]
+      count [ 0 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_brick_ur" ]
+     color [ 1 0.84 0.59 1 ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_brick_ur" ]
+     color [ 1 0.67451 0.592157 1 ]
+     windows [
+      code [ "window_sm_pointed_ul" ]
+      color [ 0.88189 0.439216 0.145252 1 ]
+      count [ 2 ]
+     ]
+     cornice [
+      code [ "cornice_shingles_ur" ]
+      color [ 1 1 1 1 ]
+     ]
+    ]
+   ]
+   flat_building "tb15:flat_DNARoot" [
+    pos [ 159.997 119.999 0 ]
+    nhpr [ -90 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.996078 0.690196 0.486275 1 ]
+    ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_dental_ur" ]
+     color [ 0.91 0.63 0.44 1 ]
+     windows [
+      code [ "window_md_curved_ul" ]
+      color [ 1 0.27 0.27 1 ]
+      count [ 2 ]
+     ]
+    ]
+   ]
+   flat_building "tb15:flat_DNARoot" [
+    pos [ 159.997 100 0 ]
+    nhpr [ -90 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_cement_ur" ]
+     color [ 1 0.88 0.8 1 ]
+     windows [
+      code [ "window_porthole_ur" ]
+      color [ 0.1 0.59 0.39 1 ]
+      count [ 1 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_cement_ur" ]
+     color [ 1 0.88 0.8 1 ]
+     windows [
+      code [ "window_porthole_ur" ]
+      color [ 0.1 0.59 0.39 1 ]
+      count [ 1 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_sm_cement_ur" ]
+     color [ 1 0.88 0.8 1 ]
+     windows [
+      code [ "window_porthole_ur" ]
+      color [ 0.1 0.59 0.39 1 ]
+      count [ 1 ]
+     ]
+    ]
+   ]
   ]
   group "props" [
   ]
@@ -964,18 +1240,157 @@ group "toontownCentral" [
   suit_edge [ 27 28 ]
   suit_edge [ 28 29 ]
   suit_edge [ 29 30 ]
+  suit_edge [ 21 31 ]
+  suit_edge [ 31 21 ]
+  suit_edge [ 20 32 ]
+  suit_edge [ 32 20 ]
   battle_cell [ 20 20 135.812 139.777 4.5 ]
   group "streets" [
    street "str.tight_corner_DNARoot" [
     code [ "street_tight_corner" ]
     pos [ 109.999 120 5 ]
-    nhpr [ 0 0 0 ]
+    nhpr [ -0 0 -0 ]
     texture [ "street_street_TT_tex" ]
     texture [ "street_sidewalk_TT_tex" ]
     texture [ "street_curb_TT_tex" ]
    ]
   ]
   group "buildings" [
+   landmark_building "tb15:toon_landmark_TT_B1_DNARoot" [
+    code [ "toon_landmark_TT_B1" ]
+    title [ "Covfefe's Coffee Shop" ]
+    pos [ 159.999 135 5 ]
+    nhpr [ -90 0 -0 ]
+    door [
+     code [ "door_double_clothesshop_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+    sign [
+     code [ "TTC_sign2" ]
+     color [ 1 0.501961 0.501961 1 ]
+     pos [ 0 0 1 ]
+     scale [ 0.75 1 0.75 ]
+     baseline [
+      code [ "TT_Comedy" ]
+      color [ 0.341176 0.32549 1 1 ]
+      pos [ 0 0 1.26785 ]
+      scale [ 0.7 1 0.7 ]
+      kern [ 0.34862 ]
+      width [ 20 ]
+      height [ 20 ]
+      text [
+       letters [ "C" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "v" ]
+      ]
+      text [
+       letters [ "f" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ "f" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ "'" ]
+      ]
+      text [
+       letters [ "s" ]
+      ]
+     ]
+     baseline [
+      code [ "mickey" ]
+      color [ 1 0.501961 0 1 ]
+      pos [ 0 0 -0.588074 ]
+      wiggle [ 3 ]
+      stomp [ 0.05 ]
+      text [
+       letters [ "C" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "f" ]
+      ]
+      text [
+       letters [ "f" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "S" ]
+      ]
+      text [
+       letters [ "h" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "p" ]
+      ]
+     ]
+    ]
+   ]
+   flat_building "tb15:flat_DNARoot" [
+    pos [ 159.999 160 5 ]
+    nhpr [ -90 0 -0 ]
+    width [ 10 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_md_pillars_ur" ]
+     color [ 1 0.69 0.49 1 ]
+     windows [
+      code [ "window_porthole_ur" ]
+      color [ 0.32 0.54 0.36 1 ]
+      count [ 1 ]
+     ]
+    ]
+    wall [
+     height [ 10 ]
+     code [ "wall_md_dental_ur" ]
+     color [ 0.91 0.63 0.44 1 ]
+     windows [
+      code [ "window_sm_curved_ur" ]
+      color [ 0.89 0.95 0.17 1 ]
+      count [ 1 ]
+     ]
+    ]
+   ]
+   flat_building "tb15:flat_DNARoot" [
+    pos [ 159.999 150 5 ]
+    nhpr [ -90 0 -0 ]
+    width [ 15 ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_blank_ur" ]
+     color [ 1 0.7 0.27 1 ]
+     cornice [
+      code [ "cornice_curved_ur" ]
+      color [ 0.79 0.36 0.19 1 ]
+     ]
+     flat_door [
+      code [ "door_single_square_ur" ]
+      color [ 1 1 1 1 ]
+     ]
+    ]
+   ]
   ]
   group "props" [
   ]
