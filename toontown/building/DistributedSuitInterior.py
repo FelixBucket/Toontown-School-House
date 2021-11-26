@@ -11,11 +11,20 @@ from direct.fsm import State
 from toontown.battle import BattleBase
 from toontown.hood import ZoneUtil
 
+from toontown.suit import SuitTimings
+from panda3d.core import VBase3, Point3
+import random
+
 class DistributedSuitInterior(DistributedObject.DistributedObject):
     id = 0
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
+        self.initialReservesJoiningDone = False
+        self.suitPendingPoints = ((Point3(-4, 8.2, 0), 190),
+                             (Point3(0, 9, 0), 179),
+                             (Point3(4, 8.2, 0), 170),
+                             (Point3(8, 3.2, 0), 160))
         self.toons = []
         self.activeIntervals = {}
         self.openSfx = base.loader.loadSfx('phase_5/audio/sfx/elevator_door_open.ogg')
@@ -335,6 +344,7 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
             self.elevatorOutOpen = 0
         return None
 
+
     def __playReservesJoining(self, ts, name, callback):
         index = 0
         for suit in self.joiningReserves:
@@ -348,13 +358,70 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         track.start(ts)
         self.activeIntervals[name] = track
 
+
+    def showSuitsJoining(self, ts, name, callback):
+        if len(self.joiningReserves) == 0 and not self.initialReservesJoiningDone:
+            self.initialReservesJoiningDone = True
+            self.doInitialSuitsJoining(ts, name, callback)
+            return
+        self.showSuitsFalling(ts, name, callback)
+
+    def doInitialSuitsJoining(self, ts, name, callback):
+        done = Func(callback)
+        if self.hasLocalToon():
+            self.notify.debug('parenting camera to distributed battle reserves')
+            camera.reparentTo(render)
+            if random.choice([0, 1]):
+                camera.setPosHpr(20, -4, 7, 60, 0, 0)
+            else:
+                camera.setPosHpr(-20, -4, 7, -60, 0, 0)
+        track = Sequence(Wait(0.5), done, name=name)
+        track.start(ts)
+        self.storeInterval(track, name)
+
+    def hasLocalToon(self):
+        return self.toons.count(base.localAvatar) > 0
+
+    def showSuitsFalling(self, ts, name, callback):
+        suitTrack = Parallel()
+        delay = 0
+        for suit in self.joiningReserves:
+            suit.setState('Battle')
+            if suit in self.joiningReserves:
+                i = self.joiningReserves.index(suit)
+                destPos, h = self.suitPendingPoints[i]
+                destHpr = VBase3(h, 0, 0)
+            else:
+                destPos, destHpr = self.getActorPosHpr(suit, self.suits)
+            startPos = destPos + Point3(0, 0, SuitTimings.fromSky * ToontownGlobals.SuitWalkSpeed)
+            self.notify.debug('startPos for %s = %s' % (suit, startPos))
+            suit.reparentTo(render)
+            suit.setPos(startPos)
+            suit.headsUp(render)
+            flyIval = suit.beginSupaFlyMove(destPos, True, 'flyIn')
+            suitTrack.append(Track((delay, Sequence(flyIval, Func(suit.loop, 'neutral')))))
+            delay += 1
+
+        if self.hasLocalToon():
+            camera.reparentTo(render)
+            if random.choice([0, 1]):
+                camera.setPosHpr(20, -4, 7, 60, 0, 0)
+            else:
+                camera.setPosHpr(-20, -4, 7, -60, 0, 0)
+        done = Func(callback)
+        track = Sequence(suitTrack, done, name=name)
+        track.start(ts)
+        self.activeIntervals[name] = track
+        return
+
     def enterReservesJoining(self, ts = 0):
-        self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        #self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        self.showSuitsJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
         return None
 
     def __handleReserveJoinDone(self):
         self.joiningReserves = []
-        self.elevatorOutOpen = 1
+        #self.elevatorOutOpen = 1
         self.d_reserveJoinDone()
 
     def exitReservesJoining(self):
