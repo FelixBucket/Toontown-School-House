@@ -10,6 +10,9 @@ from direct.distributed import DistributedObject
 from direct.fsm import State
 from toontown.battle import BattleBase
 from toontown.hood import ZoneUtil
+from toontown.battle.BattleBase import *
+from toontown.suit import SuitTimings
+import random
 
 class DistributedSuitInterior(DistributedObject.DistributedObject):
     id = 0
@@ -63,6 +66,22 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
          State.State('Reward', self.enterReward, self.exitReward, ['Off']),
          State.State('Off', self.enterOff, self.exitOff, ['Elevator', 'WaitForAllToonsInside', 'Battle'])], 'Off', 'Off')
         self.fsm.enterInitialState()
+
+        self.suitPendingPoints = ((Point3(-4, 8.2, 0), 190),
+                             (Point3(0, 9, 0), 179),
+                             (Point3(4, 8.2, 0), 170),
+                             (Point3(8, 3.2, 0), 160))
+
+        self.toonPoints = (((Point3(0, -6, 0), 0),),
+                      ((Point3(1.5, -6.5, 0), 5), (Point3(-1.5, -6.5, 0), -5)),
+                      ((Point3(3, -6.75, 0), 5), (Point3(0, -7, 0), 0), (Point3(-3, -6.75, 0), -5)),
+                      ((Point3(4.5, -7, 0), 10),
+                       (Point3(1.5, -7.5, 0), 5),
+                       (Point3(-1.5, -7.5, 0), -5),
+                       (Point3(-4.5, -7, 0), -10)))
+
+        self.initialReservesJoiningDone = False
+
         return
 
     def __uniqueName(self, name):
@@ -335,6 +354,7 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
             self.elevatorOutOpen = 0
         return None
 
+    '''
     def __playReservesJoining(self, ts, name, callback):
         index = 0
         for suit in self.joiningReserves:
@@ -347,14 +367,105 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         track = Sequence(Func(camera.wrtReparentTo, self.elevatorModelOut), Func(camera.setPos, Point3(0, -8, 2)), Func(camera.setHpr, Vec3(0, 10, 0)), Parallel(SoundInterval(self.openSfx), LerpPosInterval(self.leftDoorOut, ElevatorData[ELEVATOR_NORMAL]['closeTime'], Point3(0, 0, 0), startPos=ElevatorUtils.getLeftClosePoint(ELEVATOR_NORMAL), blendType='easeOut'), LerpPosInterval(self.rightDoorOut, ElevatorData[ELEVATOR_NORMAL]['closeTime'], Point3(0, 0, 0), startPos=ElevatorUtils.getRightClosePoint(ELEVATOR_NORMAL), blendType='easeOut')), Wait(SUIT_HOLD_ELEVATOR_TIME), Func(camera.wrtReparentTo, render), Func(callback))
         track.start(ts)
         self.activeIntervals[name] = track
+    '''
+
+    def hasLocalToon(self):
+        return self.toons.count(base.localAvatar) > 0
+
+    def getActorPosHpr(self, actor, actorList = []):
+        if isinstance(actor, Suit.Suit):
+            if actorList == []:
+                actorList = self.activeSuits
+            if actorList.count(actor) != 0:
+                numSuits = len(actorList) - 1
+                index = actorList.index(actor)
+                point = self.suitPoints[numSuits][index]
+                return (Point3(point[0]), VBase3(point[1], 0.0, 0.0))
+            else:
+                self.notify.warning('getActorPosHpr() - suit not active')
+        else:
+            if actorList == []:
+                actorList = self.activeToons
+            if actorList.count(actor) != 0:
+                numToons = len(actorList) - 1
+                index = actorList.index(actor)
+                point = self.toonPoints[numToons][index]
+                return (Point3(point[0]), VBase3(point[1], 0.0, 0.0))
+            else:
+                self.notify.warning('getActorPosHpr() - toon not active')
+
+    def showSuitsJoining(self, suits, ts, name, callback):
+        if len(suits) == 0 and not self.initialReservesJoiningDone:
+            self.initialReservesJoiningDone = True
+            self.doInitialSuitsJoining(ts, name, callback)
+            return
+        self.showSuitsFalling(suits, ts, name, callback)
+
+    def doInitialSuitsJoining(self, ts, name, callback):
+        done = Func(callback)
+        if self.hasLocalToon():
+            self.notify.debug('parenting camera to distributed battle waiters')
+            camera.reparentTo(render)
+            if random.choice([0, 1]):
+                camera.setPosHpr(20, -4, 7, 60, 0, 0)
+            else:
+                camera.setPosHpr(-20, -4, 7, -60, 0, 0)
+        track = Sequence(Wait(0.5), done, name=name)
+        track.start(ts)
+        #self.storeInterval(track, name)
+        self.activeIntervals[name] = track
+
+    def moveSuitsToInitialPos(self):
+        battlePts = self.suitPoints[len(self.suitPendingPoints) - 1]
+        for i in xrange(len(self.suits)):
+            suit = self.suits[i]
+            suit.reparentTo(render)
+            destPos, destHpr = self.getActorPosHpr(suit, self.suits)
+            suit.setPos(destPos)
+            suit.setHpr(destHpr)
+
+    def showSuitsFalling(self, suits, ts, name, callback):
+        suitTrack = Parallel()
+        delay = 0
+        for suit in self.joiningReserves:
+            #suit.makeWaiter()
+            suit.setState('Battle')
+            if suit in self.joiningReserves:
+                i = len(self.joiningReserves) + self.joiningReserves.index(suit)
+                destPos, h = self.suitPendingPoints[i]
+                destHpr = VBase3(h, 0, 0)
+            else:
+                destPos, destHpr = self.getActorPosHpr(suit, self.suits)
+            startPos = destPos + Point3(0, 0, SuitTimings.fromSky * ToontownGlobals.SuitWalkSpeed)
+            self.notify.debug('startPos for %s = %s' % (suit, startPos))
+            suit.reparentTo(render)
+            suit.setPos(startPos)
+            suit.headsUp(render)
+            flyIval = suit.beginSupaFlyMove(destPos, True, 'flyIn')
+            suitTrack.append(Track((delay, Sequence(flyIval, Func(suit.loop, 'neutral')))))
+            delay += 1
+
+        if self.hasLocalToon():
+            camera.reparentTo(render)
+            if random.choice([0, 1]):
+                camera.setPosHpr(20, -4, 7, 60, 0, 0)
+            else:
+                camera.setPosHpr(-20, -4, 7, -60, 0, 0)
+        done = Func(callback)
+        track = Sequence(suitTrack, done, name=name)
+        track.start(ts)
+        #self.storeInterval(track, name)
+        self.activeIntervals[name] = track
+        return
 
     def enterReservesJoining(self, ts = 0):
-        self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        #self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        self.showSuitsJoining(self.joiningReserves, ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
         return None
 
     def __handleReserveJoinDone(self):
         self.joiningReserves = []
-        self.elevatorOutOpen = 1
+        #self.elevatorOutOpen = 1
         self.d_reserveJoinDone()
 
     def exitReservesJoining(self):
