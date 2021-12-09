@@ -25,11 +25,10 @@ store_suit_point [ 28, STREET_POINT, 134.999 135 4.6 ]
 store_suit_point [ 29, STREET_POINT, 134.999 120 4.6 ]
 store_suit_point [ 30, STREET_POINT, 134.999 79.9999 -0.399998 ]
 store_suit_point [ 31, SIDE_DOOR_POINT, 159.91 142.34 5 ]
+store_suit_point [ 32, FRONT_DOOR_POINT, 156.566 124.743 5 ]
 store_suit_point [ 33, FRONT_DOOR_POINT, 102.117 3.1455 5 ]
 store_suit_point [ 34, FRONT_DOOR_POINT, 57.651 36.5125 -3.8147e-06 ]
 store_suit_point [ 35, FRONT_DOOR_POINT, 45.1603 3.61554 0 ]
-store_suit_point [ 36, FRONT_DOOR_POINT, 156.735 125.089 5 ]
-store_suit_point [ 37, FRONT_DOOR_POINT, 156.999 125 5 ]
 group "toontownCentral" [
  visgroup "2401" [
   vis [   "2401"   "2402"   "2403"   "2404"   "2405"   "2406"   "2407"   ]
@@ -351,6 +350,75 @@ group "toontownCentral" [
      nhpr [ 180 0 0 ]
     ]
    ]
+   landmark_building "tb5:toon_landmark_TT_A2_DNARoot" [
+    code [ "toon_landmark_TT_A2" ]
+    title [ "Some New Building" ]
+    pos [ 45.5995 39.9997 0 ]
+    nhpr [ -0 0 -0 ]
+    door [
+     code [ "door_double_square_ur" ]
+     color [ 1 1 1 1 ]
+    ]
+    sign [
+     code [ "sign_general1" ]
+     baseline [
+      code [ "humanist" ]
+      color [ 0 0 0 1 ]
+      scale [ 0.7 1 0.7 ]
+      text [
+       letters [ "S" ]
+      ]
+      text [
+       letters [ "o" ]
+      ]
+      text [
+       letters [ "m" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "e" ]
+      ]
+      text [
+       letters [ "w" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "B" ]
+      ]
+      text [
+       letters [ "u" ]
+      ]
+      text [
+       letters [ "i" ]
+      ]
+      text [
+       letters [ "l" ]
+      ]
+      text [
+       letters [ "d" ]
+      ]
+      text [
+       letters [ "i" ]
+      ]
+      text [
+       letters [ "n" ]
+      ]
+      text [
+       letters [ "g" ]
+      ]
+     ]
+    ]
+   ]
    flat_building "tb5:flat_DNARoot" [
     pos [ 70.5995 39.9997 0 ]
     nhpr [ 0 0 0 ]
@@ -402,145 +470,6 @@ group "toontownCentral" [
      code [ "prop_diner_entrance" ]
      pos [ 11.9995 -2.99991 0 ]
      nhpr [ 0 0 0 ]
-    ]
-   ]
-   landmark_building "tb5:toon_landmark_TT_A2_DNARoot" [
-    code [ "toon_landmark_TT_A2" ]
-    title [ "Ditcher, Quick & Hyde" ]
-    pos [ 45.5995 39.9997 0 ]
-    nhpr [ -0 0 -0 ]
-    door [
-     code [ "door_double_square_ur" ]
-     color [ 1 1 1 1 ]
-    ]
-    sign [
-     code [ "sign_general1" ]
-     baseline [
-      code [ "humanist" ]
-      color [ 0.501961 0.176471 0.156863 1 ]
-      pos [ 0 0 0.983363 ]
-      scale [ 0.7 1 1.5227 ]
-      kern [ 0.091463 ]
-      width [ 14.2857 ]
-      height [ 14.2857 ]
-      flags [ "bd" ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "i" ]
-      ]
-      text [
-       letters [ "t" ]
-      ]
-      text [
-       letters [ "c" ]
-      ]
-      text [
-       letters [ "h" ]
-      ]
-      text [
-       letters [ "e" ]
-      ]
-      text [
-       letters [ "r" ]
-      ]
-      text [
-       letters [ "," ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "Q" ]
-      ]
-      text [
-       letters [ "u" ]
-      ]
-      text [
-       letters [ "i" ]
-      ]
-      text [
-       letters [ "c" ]
-      ]
-      text [
-       letters [ "k" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "&" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "H" ]
-      ]
-      text [
-       letters [ "y" ]
-      ]
-      text [
-       letters [ "d" ]
-      ]
-      text [
-       letters [ "e" ]
-      ]
-     ]
-     baseline [
-      code [ "suit" ]
-      color [ 1 0 1 1 ]
-      pos [ 0 0 -0.535627 ]
-      width [ 21.803 ]
-      height [ 21.803 ]
-      flags [ "d" ]
-      text [
-       letters [ "D" ]
-      ]
-      text [
-       letters [ "i" ]
-      ]
-      text [
-       letters [ "v" ]
-      ]
-      text [
-       letters [ "o" ]
-      ]
-      text [
-       letters [ "r" ]
-      ]
-      text [
-       letters [ "c" ]
-      ]
-      text [
-       letters [ "e" ]
-      ]
-      text [
-       letters [ " " ]
-      ]
-      text [
-       letters [ "L" ]
-      ]
-      text [
-       letters [ "a" ]
-      ]
-      text [
-       letters [ "w" ]
-      ]
-      text [
-       letters [ "y" ]
-      ]
-      text [
-       letters [ "e" ]
-      ]
-      text [
-       letters [ "r" ]
-      ]
-      text [
-       letters [ "s" ]
-      ]
-     ]
     ]
    ]
   ]
@@ -1244,6 +1173,26 @@ group "toontownCentral" [
     ]
    ]
    flat_building "tb15:flat_DNARoot" [
+    pos [ 159.997 119.999 0 ]
+    nhpr [ -90 0 -0 ]
+    width [ 20 ]
+    wall [
+     height [ 10 ]
+     code [ "wall_lg_brick_ur" ]
+     color [ 0.996078 0.690196 0.486275 1 ]
+    ]
+    wall [
+     height [ 20 ]
+     code [ "wall_md_dental_ur" ]
+     color [ 0.91 0.63 0.44 1 ]
+     windows [
+      code [ "window_md_curved_ul" ]
+      color [ 1 0.27 0.27 1 ]
+      count [ 2 ]
+     ]
+    ]
+   ]
+   flat_building "tb15:flat_DNARoot" [
     pos [ 159.997 100 0 ]
     nhpr [ -90 0 -0 ]
     width [ 20 ]
@@ -1278,26 +1227,6 @@ group "toontownCentral" [
      ]
     ]
    ]
-   flat_building "tb15:flat_DNARoot" [
-    pos [ 159.997 119.999 0 ]
-    nhpr [ -90 0 -0 ]
-    width [ 20 ]
-    wall [
-     height [ 10 ]
-     code [ "wall_lg_brick_ur" ]
-     color [ 0.996078 0.690196 0.486275 1 ]
-    ]
-    wall [
-     height [ 20 ]
-     code [ "wall_md_dental_ur" ]
-     color [ 0.91 0.63 0.44 1 ]
-     windows [
-      code [ "window_md_curved_ul" ]
-      color [ 1 0.27 0.27 1 ]
-      count [ 2 ]
-     ]
-    ]
-   ]
   ]
   group "props" [
   ]
@@ -1313,10 +1242,8 @@ group "toontownCentral" [
   suit_edge [ 29 30 ]
   suit_edge [ 21 31 ]
   suit_edge [ 31 21 ]
-  suit_edge [ 20 36 ]
-  suit_edge [ 36 20 ]
-  suit_edge [ 29 37 ]
-  suit_edge [ 37 29 ]
+  suit_edge [ 20 32 ]
+  suit_edge [ 32 20 ]
   battle_cell [ 20 20 135.812 139.777 4.5 ]
   group "streets" [
    street "str.tight_corner_DNARoot" [
