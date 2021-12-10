@@ -11,7 +11,7 @@ class StreetSign(DistributedObject.DistributedObject):
     RedownloadTaskName = 'RedownloadStreetSign'
     StreetSignFileName = config.GetString('street-sign-filename', 'texture.jpg')
     StreetSignBaseDir = config.GetString('street-sign-base-dir', 'sign')
-    StreetSignUrl = base.config.GetString('street-sign-url', 'https://ttoffline.com/images/')
+    StreetSignUrl = base.config.GetString('street-sign-url', 'https://toontownoffline.net/images/')
     notify = DirectNotifyGlobal.directNotify.newCategory('StreetSign')
 
     def __init__(self):
