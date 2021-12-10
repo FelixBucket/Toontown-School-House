@@ -887,11 +887,15 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky, # cog name
                 ('Legalese',
                     (11,13,16,19,21),
                     (55,65,75,85,95),
-                    (35,35,35,35,35)),
+                    (20,20,20,20,20)),
                 ('PeckingOrder',
                     (12,15,17,19,22),
                     (70,75,80,85,95),
-                    (30,30,30,30,30)))},
+                    (20,20,20,20,20)),
+                 ('GavelSmash',
+                  (12, 15, 17, 19, 22),
+                  (70, 75, 80, 85, 95),
+                  (25, 25, 25, 25, 25)))},
  'bw': {'name': TTLocalizer.SuitBigWig,
         'singularname': TTLocalizer.SuitBigWigS,
         'pluralname': TTLocalizer.SuitBigWigP,
@@ -938,6 +942,7 @@ SuitAttacks = {'Audit': ('phone', ATK_TGT_SINGLE),
  'FountainPen': ('pen-squirt', ATK_TGT_SINGLE),
  'FreezeAssets': ('glower', ATK_TGT_SINGLE),
  'Gavel': ('gavel', ATK_TGT_SINGLE),
+ 'GavelSmash': ('effort', ATK_TGT_SINGLE),
  'GlowerPower': ('glower', ATK_TGT_SINGLE),
  'GuiltTrip': ('magic1', ATK_TGT_GROUP),
  'HalfWindsor': ('throw-paper', ATK_TGT_SINGLE),
@@ -1006,6 +1011,7 @@ FLOOD_THE_MARKET = SuitAttacks.keys().index('FloodTheMarket')
 FOUNTAIN_PEN = SuitAttacks.keys().index('FountainPen')
 FREEZE_ASSETS = SuitAttacks.keys().index('FreezeAssets')
 GAVEL = SuitAttacks.keys().index('Gavel')
+GAVEL_SMASH = SuitAttacks.keys().index('GavelSmash')
 GLOWER_POWER = SuitAttacks.keys().index('GlowerPower')
 GUILT_TRIP = SuitAttacks.keys().index('GuiltTrip')
 HALF_WINDSOR = SuitAttacks.keys().index('HalfWindsor')
