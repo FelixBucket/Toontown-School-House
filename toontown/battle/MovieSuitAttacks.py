@@ -546,15 +546,17 @@ def getToonTrack(attack, damageDelay = 1e-06, damageAnimNames = None, dodgeDelay
     dmg = target['hp']
     animTrack = Sequence()
     animTrack.append(Func(toon.headsUp, battle, suitPos))
-    #if dmg > 0 and attack['name'] is not 'GavelSmash':
-    if dmg > 0:
+    if dmg > 0 and attack['name'] is not 'GavelSmash':
+    #if dmg > 0:
+        print("ATTACK NAME: " + attack['name'])
         animTrack.append(getToonTakeDamageTrack(toon, target['died'], dmg, damageDelay, damageAnimNames, splicedDamageAnims, showDamageExtraTime))
         return animTrack
-    #if dmg > 0 and attack['name'] is 'GavelSmash':
-    #    animTrack = Parallel()
-    #    animTrack.append(getToonTakeDamageTrack(toon, target['died'], dmg, damageDelay, damageAnimNames, splicedDamageAnims, showDamageExtraTime))
-    #    animTrack.append(Sequence(toon.enterSquish(), Wait(1), toon.exitSquish()))
-    #    return animTrack
+    if dmg > 0 and attack['name'] is 'GavelSmash':
+        print("ATTACK NAME: " + attack['name'])
+        animTrack = Parallel()
+        animTrack.append(getToonTakeDamageTrack(toon, target['died'], dmg, damageDelay, damageAnimNames, splicedDamageAnims, showDamageExtraTime))
+        animTrack.append(Sequence(Wait(2.25), Func(toon.b_setAnimState, 'Squish')))
+        return animTrack
     else:
         animTrack.append(getToonDodgeTrack(target, dodgeDelay, dodgeAnimNames, splicedDodgeAnims, showMissedExtraTime))
         indicatorTrack = Sequence(Wait(dodgeDelay + showMissedExtraTime), Func(MovieUtil.indicateMissed, toon))
@@ -1993,7 +1995,7 @@ def doGavelSmash(attack):
     dodgeDelay = 1.64
     suitTrack = getSuitTrack(attack, delay=0.9)
     gavelPosPoints = [Point3(0, 3, 0), VBase3(180, 0, 0)]
-    downTime = 0.5
+    downTime = 0.25
     upTime = 1
     downAngle = -80
     goingDown = LerpHprInterval(gavel,
@@ -2006,15 +2008,17 @@ def doGavelSmash(attack):
                               startHpr=Point3(0, downAngle,0))
     gavelPropTrack = Sequence()
     gavelPropTrack.append(getPropAppearTrack(gavel, suit, gavelPosPoints, 1e-06, Point3(1, 1, 1), scaleUpTime=1.0))
+    gavelPropTrack.append(Wait(1))
     gavelPropTrack.append(goingDown)
     gavelPropTrack.append(Wait(1))
     gavelPropTrack.append(goingUp)
     #gavelPropTrack.append(Wait(1))
     gavelPropTrack.append(getPropAppearTrack(gavel, suit, gavelPosPoints, 1e-06, Point3(0, 0, 0), 1.0, Point3(1, 1, 1)))
     gavelPropTrack.append(Sequence(Func(battle.movie.clearRenderProp, gavel), Func(MovieUtil.removeProp, gavel)))
-    toonTrack = getToonTrack(attack, 1.5, ['neutral'], 1.0, ['sidestep'])
+    #toonTrack = getToonTrack(attack, 1.5, ['neutral'], 1.0, ['sidestep'])
+    toonTrack = getToonTrack(attack, 2.25, ['neutral'], 1.0, ['sidestep'])
     #toonTrack = Sequence(Wait(1.5), toon.enterSquish(), Wait(0.75), toon.exitSquish())
-    soundTrack = getSoundTrack('phase_11/audio/sfx/LB_gavel.ogg', delay=1.5, node=suit)
+    soundTrack = getSoundTrack('LB_gavel.ogg', delay=2.25, node=suit)
     return Parallel(suitTrack, toonTrack, gavelPropTrack, soundTrack)
 
 def doPlayHardball(attack):
