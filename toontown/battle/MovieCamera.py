@@ -400,7 +400,8 @@ def chooseSuitShot(attack, attackDuration):
     elif name == HEAD_SHRINK:
         camTrack.append(defaultCamera(openShotDuration=1.3))
     elif name == GAVEL_SMASH:
-        camTrack.append(defaultCamera(openShotDuration=7.5))
+        #camTrack.append(defaultCamera(openShotDuration=7.5))
+        camTrack.append(defaultCamera(openShotDuration=1.4))
     elif name == GLOWER_POWER:
         camTrack.append(defaultCamera(openShotDuration=1.4))
     elif name == GUILT_TRIP:
