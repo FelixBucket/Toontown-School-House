@@ -893,7 +893,7 @@ SuitAttributes = {'f': {'name': TTLocalizer.SuitFlunky, # cog name
                     (70,75,80,85,95),
                     (20,20,20,20,20)),
                  ('GavelSmash',
-                  (12, 15, 17, 19, 22),
+                  (18, 21, 24, 27, 30),
                   (70, 75, 80, 85, 95),
                   (25, 25, 25, 25, 25)))},
  'bw': {'name': TTLocalizer.SuitBigWig,

@@ -142,6 +142,7 @@ sd = (('magic2', 'magic2', 5),
  ('throw-paper', 'throw-paper', 5))
 le = (('speak', 'speak', 5),
  ('throw-object', 'throw-object', 5),
+ ('effort', 'effort', 6),
  ('glower', 'glower', 5),
  ('throw-paper', 'throw-paper', 5))
 bw = (('finger-wag', 'fingerwag', 5),
