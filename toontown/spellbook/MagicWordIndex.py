@@ -2125,7 +2125,7 @@ class SetSos(MagicWord):
             return "The amount must be between 0 and 100!"
 
         for npcId, npcName in TTLocalizer.NPCToonNames.items():
-            if name.lower() == npcName.lower():
+            if name.lower() == npcName.lower().replace(" ", ""):
                 if npcId not in NPCToons.npcFriends:
                     continue
                 break
