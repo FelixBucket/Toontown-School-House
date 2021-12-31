@@ -548,7 +548,6 @@ def getToonTrack(attack, damageDelay = 1e-06, damageAnimNames = None, dodgeDelay
     animTrack.append(Func(toon.headsUp, battle, suitPos))
     if dmg > 0 and attack['name'] is not 'GavelSmash':
     #if dmg > 0:
-        print("ATTACK NAME: " + attack['name'])
         animTrack.append(getToonTakeDamageTrack(toon, target['died'], dmg, damageDelay, damageAnimNames, splicedDamageAnims, showDamageExtraTime))
         return animTrack
     if dmg > 0 and attack['name'] is 'GavelSmash':

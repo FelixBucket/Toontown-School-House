@@ -210,9 +210,12 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         oldsuits = self.suits
         self.suits = []
         self.joiningReserves = []
+        executiveRarity = 40
         for suitId in suitIds:
             if suitId in self.cr.doId2do:
                 suit = self.cr.doId2do[suitId]
+                if random.randint(0, 100) <= executiveRarity:
+                    suit.setExecutive(1)
                 self.suits.append(suit)
                 suit.fsm.request('Battle')
                 suit.buildingSuit = 1
@@ -227,6 +230,8 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
             suitId = reserveIds[index]
             if suitId in self.cr.doId2do:
                 suit = self.cr.doId2do[suitId]
+                if random.randint(0, 100) <= executiveRarity:
+                    suit.setExecutive(1)
                 self.reserveSuits.append((suit, values[index]))
             else:
                 self.notify.warning('setSuits() - no suit: %d' % suitId)
@@ -415,13 +420,14 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         return
 
     def enterReservesJoining(self, ts = 0):
-        #self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
-        self.showSuitsJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        #self.showSuitsJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
         return None
 
     def __handleReserveJoinDone(self):
         self.joiningReserves = []
-        #self.elevatorOutOpen = 1
+        # Comment out below or change to 0 when fly in is on
+        self.elevatorOutOpen = 1
         self.d_reserveJoinDone()
 
     def exitReservesJoining(self):
