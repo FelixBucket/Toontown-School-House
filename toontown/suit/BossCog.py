@@ -16,8 +16,8 @@ from toontown.battle import BattleProps
 from direct.showbase.PythonUtil import Functor
 import string
 import types
-GenericModel = 'phase_9/models/char/teddBoss'
-ModelDict = {'s': 'phase_9/models/char/teddBoss',
+GenericModel = 'phase_9/models/char/bossCog'
+ModelDict = {'s': 'phase_9/models/char/sellbotBoss',
  'm': 'phase_10/models/char/cashbotBoss',
  'l': 'phase_11/models/char/lawbotBoss',
  'c': 'phase_12/models/char/bossbotBoss'}
