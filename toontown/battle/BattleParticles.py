@@ -70,6 +70,14 @@ def createParticleEffect(name = None, file = None, numParticles = None, color = 
         return loadParticleFile('buzzWord.ptf')
     elif name == 'Calculate':
         return loadParticleFile('calculate.ptf')
+    elif name == 'CigarSmoke':
+        effect = loadParticleFile('smokeTest4.ptf')
+        loadParticles()
+        particles = effect.getParticlesNamed('particles-1')
+        np = getParticle('snow-particle')
+        particles.renderer.setFromNode(np)
+        particles.renderer.setColor(Vec4(0.28, 0.28, 0.28, 0.8))
+        return effect
     elif name == 'Confetti':
         return loadParticleFile('confetti.ptf')
     elif name == 'DemotionFreeze':

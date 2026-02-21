@@ -131,7 +131,7 @@ def doSuitAttack(attack):
     elif name == CHOMP:
         suitTrack = doChomp(attack)
     elif name == CIGAR_SMOKE:
-        suitTrack = doDefault(attack)
+        suitTrack = doCigarSmoke(attack)
     elif name == CLIPON_TIE:
         suitTrack = doClipOnTie(attack)
     elif name == CRUNCH:
@@ -3294,6 +3294,37 @@ def doChomp(attack):
     dodgeAnims = [['jump', 0.01, 0.01]]
     toonTrack = getToonTrack(attack, damageDelay=3.2, splicedDamageAnims=damageAnims, dodgeDelay=2.75, splicedDodgeAnims=dodgeAnims, showDamageExtraTime=1.4)
     return Parallel(suitTrack, toonTrack, propTrack)
+
+
+def doCigarSmoke(attack):
+    suit = attack['suit']
+    battle = attack['battle']
+    target = attack['target']
+    toon = target['toon']
+    BattleParticles.loadParticles()
+    smokeEffect = BattleParticles.createParticleEffect('CigarSmoke')
+    cigar = globalPropPool.getProp('cigar')
+    cigarPosPoints = [Point3(0, -0.5, -0.2), VBase3(180, 0, 0)]
+    hitPoint = lambda toon=toon: __toonFacePoint(toon, zOffset=1.0)
+    cigarPropTrack = Sequence(
+        getPropAppearTrack(cigar, suit.getRightHand(), cigarPosPoints, 1e-06, Point3(7.5, 7.5, 7.5), scaleUpTime=0.3),
+        Wait(5.5),
+        Func(MovieUtil.removeProp, cigar))
+    smokeTrack = Sequence(
+        Wait(3.1),
+        Func(battle.movie.needRestoreParticleEffect, smokeEffect),
+        Func(smokeEffect.start, suit.getRightHand()),
+        Func(smokeEffect.wrtReparentTo, render),
+        Func(smokeEffect.setScale, 0.1),
+        Parallel(
+            LerpPosInterval(smokeEffect, 1.3, pos=hitPoint),
+            LerpScaleInterval(smokeEffect, 2.0, Point3(0.3, 0.3, 0.3))),
+        Func(smokeEffect.cleanup),
+        Func(battle.movie.clearRestoreParticleEffect, smokeEffect))
+    suitTrack = getSuitTrack(attack)
+    damageAnims = [['cringe', 0.01, 0.4]]
+    toonTrack = getToonTrack(attack, damageDelay=4.0, splicedDamageAnims=damageAnims, dodgeDelay=2.5, dodgeAnimNames=['sidestep'])
+    return Parallel(suitTrack, toonTrack, cigarPropTrack, smokeTrack)
 
 
 def doEvictionNotice(attack):
