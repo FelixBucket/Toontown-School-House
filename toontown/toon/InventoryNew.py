@@ -8,6 +8,7 @@ from direct.interval.IntervalGlobal import *
 from direct.directnotify import DirectNotifyGlobal
 from toontown.toonbase import ToontownGlobals
 from otp.otpbase import OTPGlobals
+from toontown.battle.BattleCogStatusPanels import BattleCogStatusPanels
 
 class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('InventoryNew')
@@ -49,6 +50,8 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         self.clickSuperGags = 1
         self.propAndOrganicBonusStack = base.config.GetBool('prop-and-organic-bonus-stack', 0)
         self.propBonusIval = Parallel()
+        self.cogStatusPanels = None
+        self._battleSuits = []
         self.activateMode = 'book'
         self.load()
         self.hide()
@@ -120,10 +123,18 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
                     self.makeUnpressable(buttonList[buttonIndex], self.buttons.index(buttonList), buttonIndex)
 
     def hide(self):
+        if self.cogStatusPanels:
+            self.cogStatusPanels.hideAll()
         if self.tutorialFlag:
             self.tutArrows.arrowsOff()
             self.tutText.hide()
         DirectFrame.hide(self)
+
+    def show(self):
+        DirectFrame.show(self)
+        if self.cogStatusPanels and self.activateMode == 'battle':
+            self.cogStatusPanels.showAll()
+            self.cogStatusPanels.update()
 
     def updateTotalPropsText(self):
         textTotal = TTLocalizer.InventoryTotalGags % (self.totalProps, self.toon.getMaxCarry())
@@ -356,7 +367,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         self.detailDataLabel.hide()
         self.detailCreditLabel.hide()
 
-    def setActivateMode(self, mode, heal = 1, trap = 1, lure = 1, bldg = 0, creditLevel = None, tutorialFlag = 0, gagTutMode = 0):
+    def setActivateMode(self, mode, heal = 1, trap = 1, lure = 1, bldg = 0, creditLevel = None, tutorialFlag = 0, gagTutMode = 0, activeSuits = None):
         self.notify.debug('setActivateMode() mode:%s heal:%s trap:%s lure:%s bldg:%s' % (mode,
          heal,
          trap,
@@ -372,6 +383,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         self.battleCreditLevel = creditLevel
         self.tutorialFlag = tutorialFlag
         self.gagTutMode = gagTutMode
+        self._battleSuits = activeSuits or []
         self.__activateButtons()
         self.enableUberGags()
         return None
@@ -878,12 +890,18 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
     def battleActivateButtons(self):
         self.stopAndClearPropBonusIval()
         self.reparentTo(aspect2d)
-        self.setPos(0, 0, 0.1)
+        self.setPos(0, 0, -0.05)
         self.setScale(1)
         if self.battleFrame == None:
             self.loadBattleFrame()
         self.battleFrame.show()
         self.battleFrame.setScale(0.9)
+        if self.cogStatusPanels:
+            self.cogStatusPanels.destroy()
+            self.cogStatusPanels = None
+        liveSuits = [s for s in self._battleSuits if s.currHP > 0]
+        if liveSuits:
+            self.cogStatusPanels = BattleCogStatusPanels(liveSuits)
         self.invFrame.reparentTo(self.battleFrame)
         self.invFrame.setPos(-0.26, 0, 0.35)
         self.invFrame.setScale(1)
@@ -937,6 +955,9 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         return
 
     def battleDeactivateButtons(self):
+        if self.cogStatusPanels:
+            self.cogStatusPanels.destroy()
+            self.cogStatusPanels = None
         self.invFrame.reparentTo(self)
         self.battleFrame.hide()
         self.stopAndClearPropBonusIval()
