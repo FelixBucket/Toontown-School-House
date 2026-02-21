@@ -47,6 +47,7 @@ class DistributedMinigameAI(DistributedObjectAI.DistributedObjectAI):
             self.trolleyZoneOverride = None
             self.metagameRound = -1
             self.startingVotes = {}
+            self.skipCount = 0
 
         return
 
@@ -166,6 +167,12 @@ class DistributedMinigameAI(DistributedObjectAI.DistributedObjectAI):
         self.sendUpdate('setGameAbort', [])
         self.frameworkFSM.request('frameworkCleanup')
 
+    def setGameSkip(self):
+        self.notify.debug('BASE: setGameSkip')
+        self.normalExit = 1
+        self.sendUpdate('setGameSkip', [])
+        self.frameworkFSM.request('frameworkCleanup')
+
     def handleExitedAvatar(self, avId):
         self.notify.warning('BASE: handleExitedAvatar: avatar id exited: ' + str(avId))
         self.stateDict[avId] = EXITED
@@ -232,6 +239,9 @@ class DistributedMinigameAI(DistributedObjectAI.DistributedObjectAI):
 
         self.notify.debug('  safezone: %s' % self.getSafezoneId())
         self.notify.debug('difficulty: %s' % self.getDifficulty())
+
+        self.sendUpdate('enableSkipButton', [])
+        self.notify.debug("Hit enableSkipButton in AI")
 
     def setAvatarReady(self):
         if self.frameworkFSM.getCurrentState().getName() not in ['frameworkWaitClientsReady', 'frameworkWaitClientsJoin']:
@@ -301,7 +311,7 @@ class DistributedMinigameAI(DistributedObjectAI.DistributedObjectAI):
 
         scoreList = []
         if not self.normalExit:
-            randReward = random.randrange(DEFAULT_POINTS, MAX_POINTS + 1)
+            randReward = 0
         for avId in self.avIdList:
             if self.normalExit:
                 score = int(self.scoreDict[avId] + 0.5)
@@ -398,6 +408,16 @@ class DistributedMinigameAI(DistributedObjectAI.DistributedObjectAI):
     def requestExit(self):
         self.notify.debug('BASE: requestExit: client has requested the game to end')
         self.setGameAbort()
+
+    def addSkip(self):
+        self.skipCount += 1
+        self.sendSkip()
+
+
+    def sendSkip(self):
+        playersNeededToSkip = {1:1, 2:1, 3:2, 4:3}
+        if self.skipCount == playersNeededToSkip.get(len(self.avIdList)):
+            self.setGameSkip()
 
     def local2GameTime(self, timestamp):
         return timestamp - self.gameStartTime

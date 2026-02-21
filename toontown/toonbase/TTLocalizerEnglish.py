@@ -5382,6 +5382,7 @@ CogThiefPerfect = 'PERFECT!'
 MinigameRulesPanelPlay = 'PLAY'
 GagShopName = "Goofy's Gag Shop"
 GagShopPlayAgain = 'PLAY\nAGAIN'
+MinigameRulesPanelSkip = 'SKIP'
 GagShopBackToPlayground = 'EXIT BACK TO\nPLAYGROUND'
 GagShopYouHave = 'You have %s jellybeans to spend'
 GagShopYouHaveOne = 'You have 1 jellybean to spend'

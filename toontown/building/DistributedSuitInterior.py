@@ -390,7 +390,7 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
     def showSuitsFalling(self, ts, name, callback):
         suitTrack = Parallel()
         delay = 0
-        for suit in self.joiningReserves:
+        for suit in self.b:
             suit.setState('Battle')
             if suit in self.joiningReserves:
                 i = self.joiningReserves.index(suit)
@@ -420,14 +420,14 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         return
 
     def enterReservesJoining(self, ts = 0):
-        self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
-        #self.showSuitsJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        #self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        self.showSuitsJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
         return None
 
     def __handleReserveJoinDone(self):
         self.joiningReserves = []
         # Comment out below or change to 0 when fly in is on
-        self.elevatorOutOpen = 1
+        self.elevatorOutOpen = 0
         self.d_reserveJoinDone()
 
     def exitReservesJoining(self):

@@ -31,6 +31,8 @@ import copy
 from toontown.toonbase import TTLocalizer
 from toontown.toon import NPCToons
 from libotp import *
+from panda3d.core import loadPrcFileData
+loadPrcFileData("", "interpolate-frames 1")
 camPos = Point3(14, 0, 10)
 camHpr = Vec3(89, -30, 0)
 randomBattleTimestamp = base.config.GetBool('random-battle-timestamp', 0)
@@ -589,6 +591,7 @@ class Movie(DirectObject.DirectObject):
                 toonIndex = ta[TOON_ID_COL]
                 toonId = toons[toonIndex]
                 toon = self.battle.findToon(toonId)
+                toon.setBlend(frameBlend=True)
                 if toon == None:
                     continue
                 level = ta[TOON_LVL_COL]
@@ -814,6 +817,7 @@ class Movie(DirectObject.DirectObject):
                 suitIndex = sa[SUIT_ID_COL]
                 suitId = suits[suitIndex]
                 suit = self.battle.findSuit(suitId)
+                suit.setBlend(frameBlend=True)
                 if suit == None:
                     self.notify.error('suit: %d not in battle!' % suitId)
                 adict = getSuitAttack(suit.getStyleName(), suit.getLevel(), attack)

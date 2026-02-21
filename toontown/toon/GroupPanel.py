@@ -6,6 +6,7 @@ from panda3d.core import *
 from direct.showbase import DirectObject
 from toontown.toon import ToonAvatarPanel
 from toontown.toontowngui import TTDialog
+from libotp.nametag import *
 
 class GroupPanel(DirectObject.DirectObject):
     notify = DirectNotifyGlobal.directNotify.newCategory('GroupPanel')
@@ -114,7 +115,8 @@ class GroupPanel(DirectObject.DirectObject):
 
     def __defineConstants(self):
         self.forcedHidden = False
-        self.textFgcolor = NametagGlobals.getNameFg(NametagGroup.CCSpeedChat, PGButton.SInactive)
+        self.textFgcolor = NametagGlobals.getNameFg(7, PGButton.SInactive)
+        #self.textFgcolor = NametagGlobals.getNameFg(NametagGroup.CCSpeedChat, PGButton.SInactive)
         self.textBgRolloverColor = Vec4(1, 1, 0, 1)
         self.textBgDownColor = Vec4(0.5, 0.9, 1, 1)
         self.textBgDisabledColor = Vec4(0.4, 0.8, 0.4, 1)

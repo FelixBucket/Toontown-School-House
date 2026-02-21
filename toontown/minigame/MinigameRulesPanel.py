@@ -14,6 +14,7 @@ class MinigameRulesPanel(StateData.StateData):
         self.gameTitle = gameTitle
         self.instructions = instructions
         self.TIMEOUT = timeout
+        self.acceptOnce('buttonToggle', self.enableSkipButton)
 
     def load(self):
         minigameGui = loader.loadModel('phase_4/models/gui/minigame_rules_gui')
@@ -22,6 +23,12 @@ class MinigameRulesPanel(StateData.StateData):
         self.gameTitleText = DirectLabel(parent=self.frame, text=self.gameTitle, scale=TTLocalizer.MRPgameTitleText, text_align=TextNode.ACenter, text_font=getSignFont(), text_fg=(1.0, 0.33, 0.33, 1.0), pos=TTLocalizer.MRgameTitleTextPos, relief=None)
         self.instructionsText = DirectLabel(parent=self.frame, text=self.instructions, scale=TTLocalizer.MRPinstructionsText, text_align=TextNode.ACenter, text_wordwrap=TTLocalizer.MRPinstructionsTextWordwrap, pos=TTLocalizer.MRPinstructionsTextPos, relief=None)
         self.playButton = DirectButton(parent=self.frame, relief=None, image=(buttonGui.find('**/InventoryButtonUp'), buttonGui.find('**/InventoryButtonDown'), buttonGui.find('**/InventoryButtonRollover')), image_color=Vec4(0, 0.9, 0.1, 1), text=TTLocalizer.MinigameRulesPanelPlay, text_fg=(1, 1, 1, 1), text_pos=(0, -0.02, 0), text_scale=TTLocalizer.MRPplayButton, pos=(1.0025, 0, -0.203), scale=1.05, command=self.playCallback)
+        self.skipButton = DirectButton(parent=self.frame, relief=None, image=(
+        buttonGui.find('**/InventoryButtonUp'), buttonGui.find('**/InventoryButtonDown'),
+        buttonGui.find('**/InventoryButtonRollover')), image_color=Vec4(0, 0.9, 0.1, 0.1),
+                                       text=TTLocalizer.MinigameRulesPanelSkip, text_fg=(1, 1, 1, 1),
+                                       text_pos=(0, -0.02, 0), text_scale=TTLocalizer.MRPplayButton,
+                                       pos=(1.0025, 0, 0.25), scale=1.05, command=self.skipCallback, state=DGG.DISABLED)
         minigameGui.removeNode()
         buttonGui.removeNode()
         self.timer = ToontownTimer.ToontownTimer()
@@ -30,6 +37,10 @@ class MinigameRulesPanel(StateData.StateData):
         self.timer.setPos(0.997, 0, 0.064)
         self.frame.hide()
         return
+
+    def enableSkipButton(self):
+        self.skipButton['state'] = DGG.NORMAL
+        self.skipButton['image_color'] = Vec4(0, 0.9, 0.1, 1)
 
     def unload(self):
         self.frame.destroy()
@@ -52,3 +63,6 @@ class MinigameRulesPanel(StateData.StateData):
 
     def playCallback(self):
         messenger.send(self.doneEvent)
+
+    def skipCallback(self):
+        messenger.send('skipMinigameReward')

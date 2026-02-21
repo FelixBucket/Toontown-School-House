@@ -43,3 +43,5 @@ vfs-mount resources/phase_13 /phase_13
 
 # DC file
 dc-file astron/dclass/tto.dc
+
+interpolate-frames 1

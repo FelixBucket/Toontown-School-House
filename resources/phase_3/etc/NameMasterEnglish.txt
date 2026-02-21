@@ -444,3 +444,5 @@
 432*8*zapper
 433*8*zilla
 434*8*zoom
+435*3*Loki
+436*4*Sylvie

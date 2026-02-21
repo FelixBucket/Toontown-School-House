@@ -52,7 +52,22 @@ class DistributedMinigame(DistributedObject.DistributedObject):
         self.startingVotes = {}
         self.metagameRound = -1
         self._telemLimiter = None
+        self.skipRequest = False
+        self.accept('skipMinigameReward', self.__handleSkipMinigame)
         return
+
+    def enableSkipButton(self):
+        self.notify.debug("Hit enableSkipButton()")
+        messenger.send("buttonToggle")
+
+    def __handleSkipMinigame(self):
+        self.notify.debug("__handleSkipMinigame")
+        self.requestSkip()
+
+    def requestSkip(self):
+        self.notify.debug("requestSkip")
+        self.skipRequest = True
+        self.sendUpdate('addSkip', [])
 
     def addChildGameFSM(self, gameFSM):
         self.frameworkFSM.getStateNamed('frameworkGame').addChild(gameFSM)
@@ -96,7 +111,7 @@ class DistributedMinigame(DistributedObject.DistributedObject):
             return
         self.notify.debug('BASE: handleAnnounceGenerate: send setAvatarJoined')
         if base.randomMinigameNetworkPlugPull and random.random() < 1.0 / 25:
-            print '*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL BEFORE SENDING setAvatarJoined ***'
+            print('*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL BEFORE SENDING setAvatarJoined ***')
             base.cr.pullNetworkPlug()
         self.sendUpdate('setAvatarJoined', [])
         self.normalExit = 1
@@ -109,6 +124,7 @@ class DistributedMinigame(DistributedObject.DistributedObject):
 
         def cleanup(self = self):
             self.notify.debug('BASE: cleanup: normalExit=%s' % self.normalExit)
+            self.ignore('skipMinigameReward')
             self.offstage()
             base.cr.renderFrame()
             if self.normalExit:
@@ -171,17 +187,17 @@ class DistributedMinigame(DistributedObject.DistributedObject):
                 taskMgr.doMethodLater(self.randomNetPlugPullDelay, self.doRandomNetworkPlugPull, self.uniqueName('random-netplugpull'))
 
     def doRandomAbort(self, task):
-        print '*** DOING RANDOM MINIGAME ABORT AFTER %.2f SECONDS ***' % self.randomAbortDelay
+        print('*** DOING RANDOM MINIGAME ABORT AFTER %.2f SECONDS ***' % self.randomAbortDelay)
         self.d_requestExit()
         return Task.done
 
     def doRandomDisconnect(self, task):
-        print '*** DOING RANDOM MINIGAME DISCONNECT AFTER %.2f SECONDS ***' % self.randomDisconnectDelay
+        print('*** DOING RANDOM MINIGAME DISCONNECT AFTER %.2f SECONDS ***' % self.randomDisconnectDelay)
         self.sendUpdate('setGameReady')
         return Task.done
 
     def doRandomNetworkPlugPull(self, task):
-        print '*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL AFTER %.2f SECONDS ***' % self.randomNetPlugPullDelay
+        print('*** DOING RANDOM MINIGAME NETWORK-PLUG-PULL AFTER %.2f SECONDS ***' % self.randomNetPlugPullDelay)
         base.cr.pullNetworkPlug()
         return Task.done
 
@@ -281,6 +297,14 @@ class DistributedMinigame(DistributedObject.DistributedObject):
         self.normalExit = 0
         self.frameworkFSM.request('frameworkCleanup')
 
+    def setGameSkip(self):
+        if not self.hasLocalToon:
+            return
+        self.notify.warning('BASE: setGameSkip: Skipping game')
+        self.normalExit = 1
+        base.skipMinigameReward = 1
+        self.frameworkFSM.request('frameworkCleanup')
+
     def gameOver(self):
         if not self.hasLocalToon:
             return
@@ -366,15 +390,15 @@ class DistributedMinigame(DistributedObject.DistributedObject):
             self.frameworkFSM.request('frameworkCleanup')
 
     def setGameExit(self):
-        print 'setGameExit'
+        print('setGameExit')
         if not self.hasLocalToon:
             return
         self.notify.debug('BASE: setGameExit: now safe to exit game')
         if self.frameworkFSM.getCurrentState().getName() != 'frameworkWaitServerFinish':
-            print 'not waiting'
+            print('not waiting')
             self.__serverFinished = 1
         else:
-            print 'waiting'
+            print('waiting')
             self.frameworkFSM.request('frameworkCleanup')
 
     def exitFrameworkWaitServerFinish(self):
@@ -388,7 +412,7 @@ class DistributedMinigame(DistributedObject.DistributedObject):
 
     def enterFrameworkCleanup(self):
         self.notify.debug('BASE: enterFrameworkCleanup')
-        print 'cleanup'
+        print('cleanup')
         for action in self.cleanupActions:
             action()
 
