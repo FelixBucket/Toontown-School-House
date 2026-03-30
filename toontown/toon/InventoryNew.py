@@ -52,6 +52,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         self.propBonusIval = Parallel()
         self.cogStatusPanels = None
         self._battleSuits = []
+        self.cogPanelsEnabled = True
         self.activateMode = 'book'
         self.load()
         self.hide()
@@ -132,7 +133,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
 
     def show(self):
         DirectFrame.show(self)
-        if self.cogStatusPanels and self.activateMode == 'battle':
+        if self.cogPanelsEnabled and self.cogStatusPanels and self.activateMode == 'battle':
             self.cogStatusPanels.showAll()
             self.cogStatusPanels.update()
 
@@ -890,7 +891,7 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
     def battleActivateButtons(self):
         self.stopAndClearPropBonusIval()
         self.reparentTo(aspect2d)
-        self.setPos(0, 0, -0.05)
+        self.setPos(0, 0, -0.05 if self.cogPanelsEnabled else 0.1)
         self.setScale(1)
         if self.battleFrame == None:
             self.loadBattleFrame()
@@ -899,9 +900,10 @@ class InventoryNew(InventoryBase.InventoryBase, DirectFrame):
         if self.cogStatusPanels:
             self.cogStatusPanels.destroy()
             self.cogStatusPanels = None
-        liveSuits = [s for s in self._battleSuits if s.currHP > 0]
-        if liveSuits:
-            self.cogStatusPanels = BattleCogStatusPanels(liveSuits)
+        if self.cogPanelsEnabled:
+            liveSuits = [s for s in self._battleSuits if s.currHP > 0]
+            if liveSuits:
+                self.cogStatusPanels = BattleCogStatusPanels(liveSuits)
         self.invFrame.reparentTo(self.battleFrame)
         self.invFrame.setPos(-0.26, 0, 0.35)
         self.invFrame.setScale(1)

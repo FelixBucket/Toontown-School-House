@@ -2372,6 +2372,31 @@ class PrintChildren(MagicWord):
 
 
 
+class ToggleCogPanels(MagicWord):
+    aliases = ["cogpanels"]
+    desc = "Toggles the cog status panels shown above the gag picker during battles."
+    execLocation = MagicWordConfig.EXEC_LOC_CLIENT
+
+    def handleWord(self, invoker, avId, toon, *args):
+        from toontown.battle.BattleCogStatusPanels import BattleCogStatusPanels
+        inv = base.localAvatar.inventory
+        inv.cogPanelsEnabled = not inv.cogPanelsEnabled
+        if not inv.cogPanelsEnabled:
+            if inv.cogStatusPanels:
+                inv.cogStatusPanels.destroy()
+                inv.cogStatusPanels = None
+        if inv.activateMode == 'battle' and not inv.isHidden():
+            inv.setPos(0, 0, -0.05 if inv.cogPanelsEnabled else 0.1)
+            if inv.cogPanelsEnabled:
+                if inv.cogStatusPanels:
+                    inv.cogStatusPanels.destroy()
+                    inv.cogStatusPanels = None
+                liveSuits = [s for s in inv._battleSuits if s.currHP > 0]
+                if liveSuits:
+                    inv.cogStatusPanels = BattleCogStatusPanels(liveSuits)
+        return "Cog panels have been turned {}.".format("on" if inv.cogPanelsEnabled else "off")
+
+
 # Instantiate all classes defined here to register them.
 # A bit hacky, but better than the old system
 for item in globals().values():

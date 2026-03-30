@@ -421,8 +421,8 @@ class DistributedSuitInterior(DistributedObject.DistributedObject):
         return
 
     def enterReservesJoining(self, ts = 0):
-        #self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
-        self.showSuitsJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        self.__playReservesJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
+        #self.showSuitsJoining(ts, self.uniqueName('reserves-joining'), self.__handleReserveJoinDone)
         return None
 
     def __handleReserveJoinDone(self):

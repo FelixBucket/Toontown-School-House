@@ -90,7 +90,7 @@ class BattleCogStatusPanels:
         # Level label - left side, lower
         lvlText = 'Lv. %d' % suit.getActualLevel()
         if suit.executive:
-            lvlText += ' .exe'
+            lvlText += '.exe'
         DirectLabel(
             parent=frame,
             relief=None,

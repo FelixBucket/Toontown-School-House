@@ -45,7 +45,10 @@ class SuitAvatarPanel(AvatarPanel.AvatarPanel):
                                    text_shadow=(1, 1, 1, 1))
 
         dept = SuitDNA.getSuitDeptFullname(avatar.dna.name)
-        self.levelLabel = DirectLabel(parent=self.frame, pos=(0, 0, -0.1), relief=None, text=TTLocalizer.AvatarPanelCogLevel % level, text_font=avatar.getFont(), text_align=TextNode.ACenter, text_fg=Vec4(0, 0, 0, 1), text_pos=(0, 0), text_scale=0.05, text_wordwrap=8.0)
+        levelText = TTLocalizer.AvatarPanelCogLevel % level
+        if avatar.getExecutive():
+            levelText += '.exe'
+        self.levelLabel = DirectLabel(parent=self.frame, pos=(0, 0, -0.1), relief=None, text=levelText, text_font=avatar.getFont(), text_align=TextNode.ACenter, text_fg=Vec4(0, 0, 0, 1), text_pos=(0, 0), text_scale=0.05, text_wordwrap=8.0)
         corpIcon = avatar.corpMedallion.copyTo(hidden)
         corpIcon.setPosHprScale(0, 0, 0, 0, 0, 0, 0, 0, 0)
         self.corpIcon = DirectLabel(parent=self.frame, geom=corpIcon, geom_scale=0.115, pos=(0, 0, -0.215), relief=None)
